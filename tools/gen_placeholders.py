@@ -13,15 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # id: (标题, 色相) —— 色相只影响底色，挑一个和作品气质接近的
 WORKS = {
-    "starfall":            ("星屑远征", 158),
-    "echo-cavern":         ("回声洞窟", 210),
-    "dissolve-shader":     ("溶解与燃烧着色器", 285),
-    "level-toolkit":       ("关卡搭建工具集", 130),
-    "installation-echo":   ("交互装置·回声场", 340),
-    "course-level-design": ("课程项目·箱庭关卡", 40),
     "armor-rush":          ("装甲疾驰", 25),
     "phase-protocol":      ("相位协议", 195),
     "solar-system-nav":    ("太阳系航行模拟器", 250),
+    "elemental-maskbearer": ("元素面具人", 330),
+    "echo-ronin":          ("回音浪人", 160),
 }
 
 SVG = """<?xml version="1.0" encoding="UTF-8"?>

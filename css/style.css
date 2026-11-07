@@ -327,6 +327,8 @@ main {
   font-size: 12px;
   letter-spacing: 0.04em;
 }
+.footer-inner .footer-link { color: var(--muted); text-decoration: none; }
+.footer-inner .footer-link:hover { color: var(--accent); }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 760px) {
