@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品详情 · 李璟涵</title>
+  <meta name="description" content="单件作品详情——视频、截图、技术栈与外链。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0f13'/%3E%3Cpath d='M8 22V10l8 8 8-8v12' stroke='%235eead4' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body data-page="detail" data-title-key="page.works">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><img class="logo-avatar" src="img/avatar.jpg" alt=""><span data-i18n="site.name">李璟涵</span></a>
+      <nav class="site-nav">
+        <a href="index.html" data-i18n="nav.home">首页</a>
+        <a href="ta.html" data-i18n="nav.ta">技术美术</a>
+        <a href="program.html" data-i18n="nav.program">游戏程序</a>
+        <a href="art.html" data-i18n="nav.art">艺术申研</a>
+        <a href="archive.html" data-i18n="nav.archive">全部档案</a>
+      </nav>
+      <button id="lang-toggle" class="lang-toggle mono" type="button" onclick="i18n.toggle()">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="detail">
+      <a class="back mono" href="archive.html" data-i18n="detail.back">← 返回全部档案</a>
+      <div id="detail"></div>
+    </div>
+    <dialog id="lightbox" class="lightbox">
+      <img alt="">
+      <button class="lightbox-close mono" type="button" data-i18n="lightbox.close">关闭 ✕</button>
+    </dialog>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner mono">
+      <span data-i18n="footer.rights">© 2026 李璟涵 · B站 @李子最帅哒</span>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js?v=2"></script>
+  <script src="js/data.js?v=2"></script>
+  <script src="js/render.js?v=2"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      i18n.init();
+      await renderDetail();
+      window.addEventListener('langchange', renderDetail);
+    });
+  </script>
+</body>
+</html>
