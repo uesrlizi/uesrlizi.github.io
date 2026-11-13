@@ -16,9 +16,9 @@
     "role": "独立开发",
     "roleEn": "Solo Developer",
     "tech": ["Godot 4", "GDScript", "SVG 美术", "程序化音频"],
-    "cover": "img/covers/armor-rush.svg",
+    "cover": "img/covers/armor-rush.png",
     "shots": ["img/works/armor-rush/1.svg", "img/works/armor-rush/2.svg", "img/works/armor-rush/3.svg"],
-    "video": { "bvid": "BV1NbJB6iET5", "youtube": "" },
+    "video": { "bvid": "BV1gxWv61EYq", "youtube": "" },
     "links": { "itch": "https://uesrlizi.itch.io/armor-rush", "steam": "", "github": "https://github.com/uesrlizi/ArmorRush", "demo": "" },
     "featured": true,
     "customPage": ""
