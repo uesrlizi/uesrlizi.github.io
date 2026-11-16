@@ -11,15 +11,36 @@
     "detail": "驾驶一台残机在封锁区不断向纵深突围。射击自动开火，空中按住跳跃可推进上升；击中敌人积攒冲击值，将其打入失衡后近战收割——致敬《装甲核心 6》的 STAGGER 机制。威胁分层递进：杂兵、精英导弹车、追击全程的大型 BOSS，四套场景轮换，死亡即重开新局。\n\n所有美术为手写 SVG：全平涂、无描边、无阴影，用阵营色做敌我识别（玩家琥珀、敌方锈红）。音效由脚本程序化合成，26 个音效字节级可复现；系统播报走 edge-tts / piper 双后端烘焙，加电台带通滤波效果链。\n\n项目含 headless 语法检查、场景跑测与 --autotest 全流程自测。开源非营利同人项目，与 FromSoftware / 万代南梦宫无关联。",
     "detailEn": "Pilot a broken-down mech and push ever deeper through a locked-down zone. Guns fire automatically; hold jump mid-air to boost upward like an AC. Build impact on enemies to stagger them, then close in for the melee kill — a tribute to Armored Core 6's stagger system. Threats escalate through grunts, elite missile vehicles and a boss that chases you across four rotating zones; death restarts the run.\n\nAll art is hand-written SVG: flat fills, no outlines, no shadows, with faction colors for friend-or-foe reading (player amber, enemy rust-red). The 26 sound effects are synthesized procedurally in scripts, bit-for-bit reproducible; system callouts are baked via a dual edge-tts / piper backend with a radio band-pass effect chain.\n\nThe repo ships headless syntax checks, scene smoke tests and a full --autotest run. An open-source, non-profit fan project, unaffiliated with FromSoftware / Bandai Namco.",
     "type": "game",
-    "tags": ["游戏程序", "艺术申研"],
+    "tags": [
+      "游戏程序",
+      "艺术申研"
+    ],
     "date": "2026-10",
     "role": "独立开发",
     "roleEn": "Solo Developer",
-    "tech": ["Godot 4", "GDScript", "SVG 美术", "程序化音频"],
+    "tech": [
+      "Godot 4",
+      "GDScript",
+      "SVG 美术",
+      "程序化音频"
+    ],
     "cover": "img/covers/armor-rush.png",
-    "shots": ["img/works/armor-rush/1.png", "img/works/armor-rush/2.png", "img/works/armor-rush/3.png"],
-    "video": { "bvid": "BV1gxWv61EYq", "youtube": "" },
-    "links": { "itch": "https://uesrlizi.itch.io/armor-rush", "steam": "", "github": "https://github.com/uesrlizi/ArmorRush", "demo": "" },
+    "shots": [
+      "img/works/armor-rush/1.png",
+      "img/works/armor-rush/2.png",
+      "img/works/armor-rush/3.png",
+      "img/works/armor-rush/4.png"
+    ],
+    "video": {
+      "bvid": "BV1gxWv61EYq",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "https://uesrlizi.itch.io/armor-rush",
+      "steam": "",
+      "github": "https://github.com/uesrlizi/ArmorRush",
+      "demo": ""
+    },
     "featured": true,
     "customPage": ""
   },
@@ -32,15 +53,37 @@
     "detail": "Tripo Game Jam S1 的团队作品，30 天内用 UE 5 完成开发。玩家在第一人称下同时进行射击与跑酷位移，考验瞄准与路线的配合。\n\n我在团队中负责程序与技术美术。（可再补充：你负责的具体模块、最难的技术点、是怎么解决的。）",
     "detailEn": "A team entry for Tripo Game Jam S1, built in 30 days on UE 5. Players shoot and traverse in first person, pairing aim with movement routing.\n\nI served as programmer and technical artist on the team.",
     "type": "game",
-    "tags": ["游戏程序", "技术美术"],
+    "tags": [
+      "游戏程序",
+      "技术美术"
+    ],
     "date": "2026-02",
     "role": "程序 / 技术美术",
     "roleEn": "Programmer / Technical Artist",
-    "tech": ["UE 5", "C++", "蓝图"],
-    "cover": "img/covers/phase-protocol.svg",
-    "shots": ["img/works/phase-protocol/1.svg", "img/works/phase-protocol/2.svg", "img/works/phase-protocol/3.svg"],
-    "video": { "bvid": "BV1MrcczMEG2", "youtube": "" },
-    "links": { "itch": "", "steam": "", "github": "https://github.com/uesrlizi/PhaseProtocol", "demo": "" },
+    "tech": [
+      "UE 5",
+      "C++",
+      "蓝图"
+    ],
+    "cover": "img/covers/phase-protocol.jpg",
+    "shots": [
+      "img/works/phase-protocol/1.jpg",
+      "img/works/phase-protocol/2.jpg",
+      "img/works/phase-protocol/3.jpg",
+      "img/works/phase-protocol/4.jpg",
+      "img/works/phase-protocol/5.jpg",
+      "img/works/phase-protocol/6.jpg"
+    ],
+    "video": {
+      "bvid": "BV1MrcczMEG2",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "https://github.com/uesrlizi/PhaseProtocol",
+      "demo": ""
+    },
     "featured": false,
     "customPage": ""
   },
@@ -53,15 +96,33 @@
     "detail": "从发射台点火、重力转弯、PEG 圆化进入近地轨道，到霍曼转移奔赴其他行星、被目标捕获——完整任务流程都建立在真实轨道力学上：开普勒方程解析传播、大气指数密度模型、KSP 风格的影响球（SOI）自动切换参考系。\n\n美术全部程序化生成：无外部资源，天体按屏幕半径分四级 LOD 渲染，木星条纹与大红斑、土星三层星环的正确遮挡、太阳日珥脉动都由代码绘制；时间加速带三重保护，保证关键事件不被跳过。\n\n制导算法与轨道传播分离的 KSP 式分层架构，燃料与多级火箭等复杂度刻意留白，专注于实时可视化的表现力。",
     "detailEn": "From pad ignition, gravity turn and PEG circularization into LEO, to a Hohmann transfer toward another planet and capture — the full mission runs on real orbital mechanics: analytic Kepler propagation, an exponential atmosphere model, and KSP-style spheres of influence that switch reference frames automatically.\n\nAll visuals are procedural: no external assets. Bodies render across four LOD tiers by on-screen radius; Jupiter's bands and Great Red Spot, Saturn's three-layer rings with correct occlusion, and the Sun's pulsing prominences are all drawn in code. Time acceleration carries triple safeguards so no critical event gets skipped.\n\nA KSP-style layered architecture separates guidance from orbit propagation; fuel and multi-stage rockets are deliberately out of scope to keep the focus on expressive real-time visualization.",
     "type": "artwork",
-    "tags": ["档案"],
+    "tags": [
+      "档案"
+    ],
     "date": "2026-06",
     "role": "独立完成",
     "roleEn": "Solo",
-    "tech": ["Processing", "Java", "开普勒轨道力学"],
+    "tech": [
+      "Processing",
+      "Java",
+      "开普勒轨道力学"
+    ],
     "cover": "img/covers/solar-system-nav.svg",
-    "shots": ["img/works/solar-system-nav/1.svg", "img/works/solar-system-nav/2.svg", "img/works/solar-system-nav/3.svg"],
-    "video": { "bvid": "BV1pu7w6dEt1", "youtube": "" },
-    "links": { "itch": "", "steam": "", "github": "https://github.com/uesrlizi/CreativeCoding_SolarSystemNavigation", "demo": "" },
+    "shots": [
+      "img/works/solar-system-nav/1.svg",
+      "img/works/solar-system-nav/2.svg",
+      "img/works/solar-system-nav/3.svg"
+    ],
+    "video": {
+      "bvid": "BV1pu7w6dEt1",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "https://github.com/uesrlizi/CreativeCoding_SolarSystemNavigation",
+      "demo": ""
+    },
     "featured": false,
     "customPage": ""
   },
@@ -74,15 +135,36 @@
     "detail": "Global Game Jam 2026 团队作品，48 小时内用 UE5 完成。玩家在跑酷闯关中切换不同元素面具，借助各元素的能力解开谜题、通过关卡。\n\nGame Jam 语境下的快速开发：核心玩法优先，范围严格收束，48 小时内完成可玩版本。",
     "detailEn": "A team entry for Global Game Jam 2026, built in 48 hours on UE5. While parkouring through levels, the player swaps between elemental masks, using each element's ability to solve puzzles and progress.\n\nRapid development under jam constraints: core gameplay first, scope ruthlessly cut, a playable build shipped within 48 hours.",
     "type": "game",
-    "tags": ["档案", "游戏程序"],
+    "tags": [
+      "档案",
+      "游戏程序"
+    ],
     "date": "2026-01",
     "role": "程序",
     "roleEn": "Programmer",
-    "tech": ["UE 5", "蓝图"],
-    "cover": "img/covers/elemental-maskbearer.svg",
-    "shots": ["img/works/elemental-maskbearer/1.svg", "img/works/elemental-maskbearer/2.svg", "img/works/elemental-maskbearer/3.svg"],
-    "video": { "bvid": "BV1QrffBvE8h", "youtube": "" },
-    "links": { "itch": "", "steam": "", "github": "https://github.com/uesrlizi/ElementalMaskbearer", "demo": "" },
+    "tech": [
+      "UE 5",
+      "蓝图"
+    ],
+    "cover": "img/covers/elemental-maskbearer.jpg",
+    "shots": [
+      "img/works/elemental-maskbearer/1.jpg",
+      "img/works/elemental-maskbearer/2.jpg",
+      "img/works/elemental-maskbearer/3.jpg",
+      "img/works/elemental-maskbearer/4.jpg",
+      "img/works/elemental-maskbearer/5.jpg",
+      "img/works/elemental-maskbearer/6.jpg"
+    ],
+    "video": {
+      "bvid": "BV1QrffBvE8h",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "https://github.com/uesrlizi/ElementalMaskbearer",
+      "demo": ""
+    },
     "featured": false,
     "customPage": ""
   },
@@ -95,15 +177,71 @@
     "detail": "7 天 Game Jam 的解谜游戏：玩家控制浪人主角，利用地形与回音的传播规划路线、引开或击倒敌人。\n\n在极短周期内围绕单一机制（声音的传播与反弹）构建谜题与遭遇，保持玩法聚焦。",
     "detailEn": "A puzzle game from a 7-day game jam: as a ronin, the player uses terrain and how sound travels and bounces to route around, lure out or take down enemies.\n\nWithin a very short cycle, puzzles and encounters stay focused on one mechanic — how sound propagates and reflects.",
     "type": "game",
-    "tags": ["档案", "游戏程序"],
+    "tags": [
+      "档案",
+      "游戏程序"
+    ],
     "date": "2025-11",
     "role": "程序",
     "roleEn": "Programmer",
-    "tech": ["UE 5", "蓝图"],
-    "cover": "img/covers/echo-ronin.svg",
-    "shots": ["img/works/echo-ronin/1.svg", "img/works/echo-ronin/2.svg", "img/works/echo-ronin/3.svg"],
-    "video": { "bvid": "BV19RSCBMEsb", "youtube": "" },
-    "links": { "itch": "", "steam": "", "github": "https://github.com/uesrlizi/TheEchoRonin", "demo": "" },
+    "tech": [
+      "UE 5",
+      "蓝图"
+    ],
+    "cover": "img/covers/echo-ronin.jpg",
+    "shots": [
+      "img/works/echo-ronin/1.jpg",
+      "img/works/echo-ronin/2.jpg",
+      "img/works/echo-ronin/3.jpg",
+      "img/works/echo-ronin/4.jpg",
+      "img/works/echo-ronin/5.jpg",
+      "img/works/echo-ronin/6.jpg",
+      "img/works/echo-ronin/7.jpg"
+    ],
+    "video": {
+      "bvid": "BV19RSCBMEsb",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "https://github.com/uesrlizi/TheEchoRonin",
+      "demo": ""
+    },
+    "featured": false,
+    "customPage": ""
+  },
+  {
+    "id": "commander-despair",
+    "title": "绝境指挥官",
+    "titleEn": "",
+    "desc": "俯视角带队突围：指挥官与士兵在城市街区中推进。（介绍待补）",
+    "descEn": "",
+    "detail": "（详情待补——玩法、你负责的部分、技术点之后补全。）",
+    "detailEn": "",
+    "type": "game",
+    "tags": [
+      "档案"
+    ],
+    "date": "2026-11",
+    "role": "",
+    "roleEn": "",
+    "tech": [],
+    "cover": "img/works/commander-despair/1.jpg",
+    "shots": [
+      "img/works/commander-despair/1.jpg",
+      "img/works/commander-despair/2.jpg"
+    ],
+    "video": {
+      "bvid": "",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "",
+      "demo": ""
+    },
     "featured": false,
     "customPage": ""
   }
