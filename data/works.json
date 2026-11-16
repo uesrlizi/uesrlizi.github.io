@@ -107,11 +107,13 @@
       "Java",
       "开普勒轨道力学"
     ],
-    "cover": "img/covers/solar-system-nav.svg",
+    "cover": "img/works/solar-system-nav/1.jpg",
     "shots": [
-      "img/works/solar-system-nav/1.svg",
-      "img/works/solar-system-nav/2.svg",
-      "img/works/solar-system-nav/3.svg"
+      "img/works/solar-system-nav/1.jpg",
+      "img/works/solar-system-nav/2.jpg",
+      "img/works/solar-system-nav/3.jpg",
+      "img/works/solar-system-nav/4.jpg",
+      "img/works/solar-system-nav/5.jpg"
     ],
     "video": {
       "bvid": "BV1pu7w6dEt1",
@@ -234,6 +236,44 @@
     ],
     "video": {
       "bvid": "",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "",
+      "demo": ""
+    },
+    "featured": false,
+    "customPage": ""
+  },
+  {
+    "id": "gui-qiao",
+    "title": "归鞘",
+    "titleEn": "",
+    "desc": "行走于现代城市中的武士。（介绍待补）",
+    "descEn": "",
+    "detail": "（详情待补——玩法、你负责的部分、技术点之后补全。）",
+    "detailEn": "",
+    "type": "game",
+    "tags": [
+      "档案"
+    ],
+    "date": "2026-09",
+    "role": "",
+    "roleEn": "",
+    "tech": [],
+    "cover": "img/works/gui-qiao/1.jpg",
+    "shots": [
+      "img/works/gui-qiao/1.jpg",
+      "img/works/gui-qiao/2.jpg",
+      "img/works/gui-qiao/3.jpg",
+      "img/works/gui-qiao/4.jpg",
+      "img/works/gui-qiao/5.jpg",
+      "img/works/gui-qiao/6.jpg"
+    ],
+    "video": {
+      "bvid": "BV1KpaZ6xEXu",
       "youtube": ""
     },
     "links": {
