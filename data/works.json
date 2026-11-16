@@ -284,5 +284,48 @@
     },
     "featured": false,
     "customPage": ""
+  },
+  {
+    "id": "game-dream",
+    "title": "游戏之梦",
+    "titleEn": "",
+    "desc": "Game Jam 作品：在游戏里做游戏——办公室、服务器机房与战场。（介绍待补）",
+    "descEn": "",
+    "detail": "（详情待补——玩法、你负责的部分、技术点之后补全。）",
+    "detailEn": "",
+    "type": "game",
+    "tags": [
+      "档案",
+      "游戏程序"
+    ],
+    "date": "2025-12",
+    "role": "",
+    "roleEn": "",
+    "tech": [
+      "UE 5"
+    ],
+    "cover": "img/works/game-dream/7.jpg",
+    "shots": [
+      "img/works/game-dream/1.jpg",
+      "img/works/game-dream/2.jpg",
+      "img/works/game-dream/3.jpg",
+      "img/works/game-dream/4.jpg",
+      "img/works/game-dream/5.jpg",
+      "img/works/game-dream/6.jpg",
+      "img/works/game-dream/7.jpg",
+      "img/works/game-dream/8.jpg"
+    ],
+    "video": {
+      "bvid": "BV1YjvrBxE7t",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "",
+      "demo": ""
+    },
+    "featured": false,
+    "customPage": ""
   }
 ]
