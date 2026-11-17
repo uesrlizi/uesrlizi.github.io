@@ -133,18 +133,18 @@
     "id": "elemental-maskbearer",
     "title": "元素面具人",
     "titleEn": "Elemental Maskbearer",
-    "desc": "48 小时 Global Game Jam 作品：跑酷与元素面具解谜结合的闯关游戏，UE5 制作。",
-    "descEn": "A 48-hour Global Game Jam entry: a parkour puzzler built around elemental masks, made in UE5.",
-    "detail": "Global Game Jam 2026 团队作品，48 小时内用 UE5 完成。玩家在跑酷闯关中切换不同元素面具，借助各元素的能力解开谜题、通过关卡。\n\nGame Jam 语境下的快速开发：核心玩法优先，范围严格收束，48 小时内完成可玩版本。",
-    "detailEn": "A team entry for Global Game Jam 2026, built in 48 hours on UE5. While parkouring through levels, the player swaps between elemental masks, using each element's ability to solve puzzles and progress.\n\nRapid development under jam constraints: core gameplay first, scope ruthlessly cut, a playable build shipped within 48 hours.",
+    "desc": "48 小时 Global Game Jam 作品：跑酷解谜闯关，切换元素面具获得元素能力、变更阵营躲避敌人。带两位零基础队友，UE5 制作。",
+    "descEn": "A 48-hour Global Game Jam entry: a parkour puzzler where swapping elemental masks grants abilities and switches your faction to slip past enemies. Built on UE5, leading two first-time teammates.",
+    "detail": "Global Game Jam 2026 团队作品，48 小时内用 UE5 完成。跑酷解谜闯关：玩家收集并切换元素面具，获得对应元素能力，同时变更自身阵营，借身份切换躲避敌人。我承担程序、建模、材质与特效，并带两位零基础的队友协作完成。\n\n程序是最得意的部分：在 UE 蓝图里做了漂亮且高效的面向对象抽象与类继承——角色类、机关类各成体系，另配管理器与关卡重置功能。当时思路清晰，做得很快，写出来的结构也干净。\n\n美术同样由我承担：用简单几何体建出角色与道具；敌人、道具与机关共用同一套发光材质，撑起全作统一的视觉语言；特效覆盖胜利彩带、近战斩击与魔法炮弹。最难的是建模：不擅长形体抽象，角色形象折腾很久也没能建出来，最后是球脑袋加圆柱身子，前后无法辨认——干脆挂一个箭头组件示意朝向。\n\n比赛后没有再动，停留在 demo 状态。若回头继续，第一件事是重做关卡：当时关卡设计投入不足，教学关很弱、第一关过难，缺少合理引导。",
+    "detailEn": "A team entry for Global Game Jam 2026, built in 48 hours on UE5. A parkour puzzler: the player collects and swaps elemental masks, gaining each element's ability while switching faction at the same time, dodging enemies by changing sides. I handled programming, modeling, materials and VFX, and brought two first-time teammates through the build.\n\nProgramming is the part I'm proudest of: clean, efficient object-oriented abstraction and class inheritance in UE Blueprints — character and mechanism classes in their own hierarchies, plus a manager and level reset. The design was clear in my head, so it went fast and the structure stayed clean.\n\nI owned the art as well: characters and props modeled from simple geometry; a shared glow material running through enemies, props and mechanisms to carry the game's visual language; VFX for victory confetti, melee slashes and magic projectiles. Modeling was the hardest part — shape abstraction isn't my strength, and the character never came together no matter how long I worked at it. The result was a sphere head on a cylinder body with no readable front or back, so I attached an arrow component to indicate facing.\n\nUntouched since the jam — it remains a demo. If I ever pick it up again, the first job is rebuilding the levels: level design was under-invested at the time, with a weak tutorial, an overtuned first level and little real guidance.",
     "type": "game",
     "tags": [
       "档案",
       "游戏工程师"
     ],
     "date": "2026-01",
-    "role": "程序",
-    "roleEn": "Programmer",
+    "role": "程序 / 美术",
+    "roleEn": "Programmer / Artist",
     "tech": [
       "UE 5",
       "蓝图"
@@ -226,7 +226,7 @@
     "tags": [
       "档案"
     ],
-    "date": "2026-11",
+    "date": "2026-04",
     "role": "",
     "roleEn": "",
     "tech": [],
@@ -252,18 +252,22 @@
     "id": "gui-qiao",
     "title": "归鞘",
     "titleEn": "",
-    "desc": "行走于现代城市中的武士。（介绍待补）",
-    "descEn": "",
-    "detail": "（详情待补——玩法、你负责的部分、技术点之后补全。）",
-    "detailEn": "",
+    "desc": "个人 + AI 开发的 2.5D 横版冒险：操控武士在城市中漫游观光。场景由 AI 手写的 SVG 矢量图作 3D 精灵立体拼装，矢量画风打 3D 灯光。",
+    "descEn": "A 2.5D side-scrolling adventure built solo with AI: walk a samurai through the city and sightsee. Scenes are assembled in 3D from AI-written SVG vector art — a vector-art look lit in 3D.",
+    "detail": "个人 + AI 开发的 2.5D 横版冒险，玩法很难定性，近乎走路模拟器：操控角色在城市里走来走去观光，遭遇敌人时战斗全自动进行，没有操作空间，看就好。项目真正的目的是摸索一套 AI 场景生产管线，玩法为场景服务。\n\n最难也最得意的是 2.5D 场景：让 AI 手写 SVG 矢量图，当作 3D 精灵在引擎里立体组装成完整场景——矢量画的笔触，立体拼出的纵深，再打上 3D 灯光。这种做法没有常见先例，AI 很容易做偏，装配阶段状况不断。\n\n对策是制定并持续迭代场景生成规范：要求 AI 自己做几何验算，摄像机能看到的每个面都必须被覆盖，不留穿帮。验收以直接游玩、直接看为主；部分场景 AI 修不动，就直接手动挪移调整——这类问题喊 AI 修效率很低，还不一定修得动。\n\n人物与特效也由 AI 生成：人物迭代了好几版始终不满意，为不停摆只能接受“能看”的版本；特效没有逐一核对。项目现状是搁置——它本就是趟管线用的项目，没有重做一说；想继续时可以再产场景，也可以回头调玩法。",
+    "detailEn": "A solo + AI project: a 2.5D side-scrolling adventure that's hard to classify — something close to a walking simulator. You walk a character through the city sightseeing; when enemies show up, combat runs fully on its own, with nothing for the player to do but watch. The real purpose of the project was to work out an AI scene-production pipeline; gameplay exists to serve the scenes.\n\nThe hardest and proudest part is the 2.5D scenes: having the AI hand-write SVG vector art, then using it as 3D sprites assembled into full scenes inside the engine — the brushwork of vector illustration, depth from layered assembly, lit with 3D lights. With no established precedent for this approach, the AI drifts easily, and assembly kept running into problems.\n\nThe answer was a scene-generation spec, defined and iterated over time: the AI has to run its own geometry checks — every face the camera can see must be covered, leaving no gaps. Acceptance was mostly playing the build and looking. Some scenes the AI couldn't fix, so I adjusted them by hand — asking AI to fix these is inefficient and may never land.\n\nCharacters and VFX were AI-generated too: several rounds of characters never satisfied me, and to keep the project moving I settled for a version that was merely presentable; VFX weren't checked one by one. The project is now shelved. It was a probe for the pipeline, so there's nothing to redo — if I pick it up, it grows more scenes, or the gameplay gets another pass.",
     "type": "game",
     "tags": [
+      "AI场景美术",
       "档案"
     ],
     "date": "2026-09",
-    "role": "",
-    "roleEn": "",
-    "tech": [],
+    "role": "独立开发",
+    "roleEn": "Solo Developer",
+    "tech": [
+      "SVG 美术",
+      "AI 生成管线"
+    ],
     "cover": "img/works/gui-qiao/1.jpg",
     "shots": [
       "img/works/gui-qiao/1.jpg",
