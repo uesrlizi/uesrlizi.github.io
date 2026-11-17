@@ -112,6 +112,31 @@ function detailHTML(w, lang) {
   ${linkBtns ? `<div class="detail-links">${linkBtns}</div>` : ''}`;
 }
 
+/* 详情页"返回"链接：从哪个分类进来就回哪个分类（读 referrer），
+   直接打开/来源不明则回落全部档案。*/
+const ROUTE_PAGES = {
+  'ta.html': 'page.ta',
+  'program.html': 'page.program',
+  'ai-art.html': 'page.ai',
+  'art.html': 'page.art',
+  'archive.html': 'page.archive',
+};
+function applyBackLink() {
+  const backLink = document.querySelector('.back');
+  if (!backLink) return;
+  let key = 'page.archive';
+  try {
+    const from = new URL(document.referrer).pathname.split('/').pop();
+    if (ROUTE_PAGES[from]) key = ROUTE_PAGES[from];
+  } catch (e) { /* referrer 不可用 → 回落 */ }
+  const name = i18n.t(key);
+  backLink.href = key === 'page.archive' ? 'archive.html'
+    : Object.keys(ROUTE_PAGES).find(h => ROUTE_PAGES[h] === key);
+  backLink.textContent = i18n.lang === 'en'
+    ? '← Back to ' + name
+    : '← 返回' + name;
+}
+
 async function renderDetail() {
   const app = document.getElementById('detail');
   if (!app) return;
@@ -143,6 +168,7 @@ async function renderDetail() {
 
   app.innerHTML = detailHTML(w, lang);
   document.title = pickField(w, 'title', lang) + ' · ' + i18n.t('site.name');
+  applyBackLink();
   bindLightbox(app);
 }
 
