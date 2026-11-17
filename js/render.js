@@ -52,7 +52,8 @@ async function fillEntryCounts() {
     const tag = el.dataset.countTag;
     const n = tag === '*' ? works.length
       : works.filter(w => (w.tags || []).includes(tag)).length;
-    el.textContent = i18n.t('entry.count').replace('{n}', n);
+    const tpl = (i18n.lang === 'en' && n === 1) ? 'entry.countOne' : 'entry.count';
+    el.textContent = i18n.t(tpl).replace('{n}', n);
   });
 }
 
@@ -134,6 +135,11 @@ async function renderDetail() {
     document.title = i18n.t('page.works') + ' · ' + i18n.t('site.name');
     return;
   }
+
+  /* 详情页强调色跟随作品的第一条身份标签 */
+  const TAG_ACCENT = { '技术美术': 'teal', '游戏工程师': 'amber', 'AI场景美术': 'violet', '申研作品集': 'rust' };
+  const acc = (w.tags || []).map(t => TAG_ACCENT[t]).find(Boolean);
+  if (acc) document.body.dataset.accent = acc;
 
   app.innerHTML = detailHTML(w, lang);
   document.title = pickField(w, 'title', lang) + ' · ' + i18n.t('site.name');

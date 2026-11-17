@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI场景美术 · 李璟涵</title>
+  <meta name="description" content="AI 场景美术方向作品——AI 辅助生成的场景与概念图。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0f13'/%3E%3Cpath d='M8 22V10l8 8 8-8v12' stroke='%235eead4' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body data-page="list" data-tag="AI场景美术" data-title-key="page.ai" data-accent="violet">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><img class="logo-avatar" src="img/avatar.jpg" alt=""><span data-i18n="site.name">李璟涵</span></a>
+      <nav class="site-nav">
+        <a href="index.html" data-i18n="nav.home">首页</a>
+        <a href="ta.html" data-i18n="nav.ta">技术美术</a>
+        <a href="program.html" data-i18n="nav.program">游戏工程师</a>
+        <a href="ai-art.html" aria-current="page" data-i18n="nav.ai">AI场景美术</a>
+        <a href="art.html" data-i18n="nav.art">申研作品集</a>
+        <a href="archive.html" data-i18n="nav.archive">全部档案</a>
+      </nav>
+      <button id="lang-toggle" class="lang-toggle mono" type="button" onclick="i18n.toggle()">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <span class="ph-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="10" width="32" height="28" rx="3"/>
+        <path d="M12 36.5 L20 23 L25 30 L30 24.5 L36 36.5"/>
+        <circle cx="32.5" cy="17" r="3"/>
+        <path d="M15.5 11.5 C15.9 14 17 15.1 19.5 15.5 C17 15.9 15.9 17 15.5 19.5 C15.1 17 14 15.9 11.5 15.5 C14 15.1 15.1 14 15.5 11.5 Z" fill="currentColor" stroke="none"/>
+      </svg></span>
+      <div>
+        <h1 data-i18n="page.ai">AI场景美术</h1>
+        <p class="ph-sub mono"><span data-i18n="enlabel.ai">AI SCENE ART</span><span class="dot"> · </span><span class="cnt" data-count-tag="AI场景美术"></span></p>
+      </div>
+    </section>
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner mono">
+      <span data-i18n="footer.rights">© 2026 李璟涵 · B站 @李子最帅哒</span>
+      <a class="footer-link" href="https://github.com/uesrlizi" target="_blank" rel="noopener">GitHub @uesrlizi</a>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js?v=5"></script>
+  <script src="js/data.js?v=2"></script>
+  <script src="js/render.js?v=3"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      i18n.init();
+      await Promise.all([renderList(), fillEntryCounts()]);
+      window.addEventListener('langchange', () => { renderList(); fillEntryCounts(); });
+    });
+  </script>
+</body>
+</html>

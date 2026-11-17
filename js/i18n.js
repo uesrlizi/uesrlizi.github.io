@@ -13,19 +13,30 @@ const I18N = {
     'site.name': '李璟涵',
     'page.home': '首页',
     'page.ta': '技术美术',
-    'page.program': '游戏程序',
-    'page.art': '艺术申研',
+    'page.program': '游戏工程师',
+    'page.ai': 'AI场景美术',
+    'page.art': '申研作品集',
     'page.archive': '全部档案',
     'page.works': '作品详情',
 
     'nav.home': '首页',
     'nav.ta': '技术美术',
-    'nav.program': '游戏程序',
-    'nav.art': '艺术申研',
+    'nav.program': '游戏工程师',
+    'nav.ai': 'AI场景美术',
+    'nav.art': '申研作品集',
     'nav.archive': '全部档案',
 
-    'home.questionL1': '你希望我是',
-    'home.questionL2': '谁？',
+    /* 首页：zh 态的英文影子行（en 态隐藏，标题本身已是英文） */
+    'home.question': '你在找的是？',
+    'home.shadow': 'WHAT ARE YOU LOOKING FOR?',
+
+    /* 列表页头的英文小标（en 态隐藏，标题本身已是英文） */
+    'enlabel.ta': 'TECH ART',
+    'enlabel.program': 'GAME ENGINEERING',
+    'enlabel.ai': 'AI SCENE ART',
+    'enlabel.art': 'APPLICATION PORTFOLIO',
+    'enlabel.archive': 'ARCHIVE',
+
     'entry.count': '{n} 件作品',
 
     'err.load': '作品数据加载失败，请刷新重试。',
@@ -51,20 +62,30 @@ const I18N = {
     'site.name': 'Jinghan Li',
     'page.home': 'Home',
     'page.ta': 'Tech Art',
-    'page.program': 'Game Programming',
-    'page.art': 'Art Application',
+    'page.program': 'Game Engineering',
+    'page.ai': 'AI Scene Art',
+    'page.art': 'Application Portfolio',
     'page.archive': 'Archive',
     'page.works': 'Work',
 
     'nav.home': 'Home',
     'nav.ta': 'Tech Art',
-    'nav.program': 'Programming',
-    'nav.art': 'Art App',
+    'nav.program': 'Game Eng',
+    'nav.ai': 'AI Scene',
+    'nav.art': 'Portfolio',
     'nav.archive': 'Archive',
 
-    'home.questionL1': 'Who do you',
-    'home.questionL2': 'need me to be?',
+    'home.question': 'What are you looking for?',
+    'home.shadow': '',
+
+    'enlabel.ta': '',
+    'enlabel.program': '',
+    'enlabel.ai': '',
+    'enlabel.art': '',
+    'enlabel.archive': '',
+
     'entry.count': '{n} works',
+    'entry.countOne': '{n} work',
 
     'err.load': 'Failed to load works data. Please refresh.',
 
