@@ -117,6 +117,24 @@ const i18n = {
     this.lang = (fromUrl || stored) === 'en' ? 'en' : 'zh';
     if (fromUrl) localStorage.setItem('portfolio-lang', this.lang);
     this.apply();
+    this.initNavToggle();
+  },
+
+  /* 移动端折叠菜单：汉堡开关 + 点链接/点外部收起 */
+  initNavToggle() {
+    const tgl = document.getElementById('nav-toggle');
+    if (!tgl) return;
+    const header = tgl.closest('.site-header');
+    const setOpen = (open) => {
+      header.classList.toggle('nav-open', open);
+      tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    tgl.addEventListener('click', () => setOpen(!header.classList.contains('nav-open')));
+    header.querySelectorAll('.nav-menu a').forEach(a =>
+      a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', e => {
+      if (header.classList.contains('nav-open') && !header.contains(e.target)) setOpen(false);
+    });
   },
 
   t(key) {

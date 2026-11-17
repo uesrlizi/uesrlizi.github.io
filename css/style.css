@@ -113,6 +113,10 @@ img { max-width: 100%; }
 }
 .lang-toggle:hover { border-color: var(--pg); color: var(--pg); }
 
+/* 移动端折叠菜单（≤760 由 JS 切换 .nav-open） */
+.nav-toggle, .quick-archive { display: none; }
+.nav-menu { display: none; }
+
 /* ---------- 主体 ---------- */
 main {
   max-width: 1160px;
@@ -354,12 +358,64 @@ main {
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 760px) {
-  .header-inner { height: auto; padding: 10px 16px; flex-wrap: wrap; }
-  .site-nav { order: 3; width: 100%; margin-left: -8px; }
-  .lang-toggle { margin-left: auto; }
+  /* 顶栏单行：logo + 全部档案 + 语言 + 汉堡；完整导航进折叠菜单 */
+  .header-inner { height: 56px; padding: 0 16px; gap: 10px; }
+  .site-nav { display: none; }
+  .quick-archive {
+    display: inline-flex;
+    margin-left: auto;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    transition: 0.15s;
+  }
+  .quick-archive:hover { color: var(--pg); }
+  .lang-toggle { margin-left: 0; }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 34px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .nav-toggle svg { width: 20px; height: 20px; }
+  .nav-toggle:hover { border-color: var(--pg); color: var(--pg); }
+  .site-header.nav-open .nav-toggle { border-color: var(--pg); color: var(--pg); }
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 8px 16px 12px;
+    background: rgba(10, 11, 16, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .site-header.nav-open .nav-menu { display: flex; }
+  .nav-menu a {
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .nav-menu a:hover { color: var(--text); background: var(--surface-2); }
+  .nav-menu a[aria-current="page"] { color: var(--pg); background: var(--pg-dim); }
+
   main { padding: 0 16px 64px; }
   .page-head { padding: 36px 0 6px; gap: 14px; }
   .ph-icon { width: 48px; height: 48px; border-radius: 11px; }
   .ph-icon svg { width: 30px; height: 30px; }
   .gallery { grid-template-columns: 1fr; }
+  /* 页脚收成一行居中，且在文档流末尾（滚动才见） */
+  .footer-inner { justify-content: center; gap: 14px; font-size: 11px; }
 }
