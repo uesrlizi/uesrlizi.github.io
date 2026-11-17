@@ -590,6 +590,15 @@
       });
     });
 
+    /* ========= 浏览器回退/前进（bfcache）恢复：卡牌回手，解除出牌锁 ========= */
+    window.addEventListener('pageshow', e => {
+      if (!e.persisted && !document.body.classList.contains('playing')) return;
+      going = false;
+      document.body.classList.remove('playing');
+      document.body.style.removeProperty('--live');
+      cards.forEach(o => o.classList.remove('play', 'fold'));
+    });
+
     /* ========= 启动 ========= */
     fields.forEach(fitField);
     function drawAll(t,dt){
