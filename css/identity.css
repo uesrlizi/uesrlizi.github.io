@@ -278,7 +278,7 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
 
 /* ---------- 主打卡的字：浮在卡下方桌面上（卡面只有图；无链接行——整卡即入口） ---------- */
 .flabel {
-  margin: 16px auto 0;
+  margin: 4px auto 0;   /* 视觉间距 = 4 + hero-raise 抬升 12 ≈ 16 */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -336,7 +336,8 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
   gap: clamp(14px, 2vh, 22px) clamp(14px, 2vw, 64px);   /* 列距随屏长摊开（封顶 64） */
   max-width: 100%;
 }
-.hero-col { display: flex; flex-direction: column; align-items: center; }
+.hero-col { display: flex; flex-direction: column; align-items: center;
+  animation: floaty 6s ease-in-out 1.5s infinite; }   /* 浮字与卡同体浮动：间距恒定、归属明确 */
 .hero-raise { transform: translateY(-12px); }
 .deal { transform-style: preserve-3d; }
 
@@ -345,8 +346,7 @@ body:not(.on) .rv0 { opacity: 0; }
 html:not(.shot) body.on .engrave.rv0 { animation: etch 0.6s ease backwards; }
 html:not(.shot) body.on .deal.rv0 { animation: dealout 0.5s cubic-bezier(0.22, 0.75, 0.25, 1) backwards;
   animation-delay: calc(0.34s + var(--i, 0) * 0.06s); }
-html:not(.shot) body.on .fhold.rv0 { animation: drawin 0.6s cubic-bezier(0.3, 0.7, 0.24, 1) 0.15s backwards,
-  floaty 6s ease-in-out 1.5s infinite; }
+html:not(.shot) body.on .fhold.rv0 { animation: drawin 0.6s cubic-bezier(0.3, 0.7, 0.24, 1) 0.15s backwards; }
 @keyframes etch { from { opacity: 0; letter-spacing: 0.34em; } }
 @keyframes dealout { from { opacity: 0; transform: translateY(96px); } }
 @keyframes drawin { from { opacity: 0; transform: translate(30%, 70%) rotateZ(4deg) scale(0.95); } }
@@ -358,7 +358,7 @@ html.shot body { position: relative; }
 html.shot *, html.shot *::before, html.shot *::after { animation: none !important; transition: none !important; }
 html.shot .rv0 { opacity: 1 !important; }
 @media (prefers-reduced-motion: reduce) {
-  .rv0 { opacity: 1 !important; animation: none !important; }
+  .rv0, .hero-col { opacity: 1 !important; animation: none !important; }
   .lift, .flip, .pcover img, .flabel { transition: none !important; }
 }
 
