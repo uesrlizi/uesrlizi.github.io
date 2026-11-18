@@ -22,7 +22,8 @@
     body.home-page .site-header{flex:none}
     body.home-page .site-footer{flex:none;border-top:1px solid var(--border)}
 
-    .stage{position:relative;z-index:3;flex:1 0 auto;display:flex;flex-direction:column;padding:0 30px}
+    /* 底部 44px（手机 38px）≈ 原页脚高度：补回卡牌离屏底的构图距离 */
+    .stage{position:relative;z-index:3;flex:1 0 auto;display:flex;flex-direction:column;padding:0 30px 44px}
     /* 标题区与卡片区对半分享剩余高度：标题在卡牌上方空间里垂直居中 */
     .head{position:relative;z-index:2;flex:1 0 auto;display:flex;flex-direction:column;
       justify-content:center;align-items:center;padding:18px 0 8px}
@@ -184,7 +185,7 @@
 
     /* ===== 竖屏（≤720px，独立构图：2×2 一手牌） ===== */
     html.p body.home-page main{padding:0 18px}
-    html.p .stage{padding:0}
+    html.p .stage{padding:0 0 38px}
     html.p .head{padding:10px 0 4px}
     html.p .question{font-size:clamp(34px,9vw,42px);letter-spacing:.08em;margin:0}
     html.p .q-shadow{margin:6px 0 0;font-size:10px;letter-spacing:.24em}
