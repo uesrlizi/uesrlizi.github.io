@@ -1,6 +1,7 @@
 /* identity.js — 身份页「摊牌」渲染（方案N 制式，四个身份页共用）
-   - 数据：Works.byTag(body[data-tag])，置顶优先、日期倒序；第一件 = 主打卡，其余 = 背排小卡
-   - 主打卡常驻横排满图面：出场拿进示竖排正面 → 45° 斜轴翻一次 → 常驻横排；字浮在卡下桌面
+   - 数据：Works.byTag(body[data-tag])，置顶优先、日期倒序；第一件 = 主打卡，其余 = 同排行小卡
+   - 同排行：hero 连浮字作整体占行首（左上第一），其余随行，放不下自动换行
+   - 主打卡常驻横排满图面：出场拿进示竖排正面（浮字净空）→ 45° 斜轴翻一次，浮字随翻面渐显
    - 小卡永远竖排正面；悬浮 = 判定原位的简单上浮（见 identity.css .lift）
    - 桌面织物：逐身份画场（节点网络 / 字符雨 / 极光浮斑 / 锈红墨痕），同种子稳定
    - 语言：i18n.js 广播 langchange 后原地重渲染；?lang 深链由 i18n.js 处理
@@ -76,19 +77,22 @@ function cardHTML(w, idx, opts) {
   return `<div class="fhold${rv}"><div class="card3d fcard3d${rv}" data-url="${esc(url)}" role="link" tabindex="0" aria-label="${esc(pickField(w, 'title', i18n.lang))}">
     ${inner}</div></div>`;
 }
+/* hero 连浮字 = 一个整体单元格（同排行制式） */
+const RZ = [-1.7, 1.3, -1.1, 1.8, -1.4, 1.6, -1.9, 1.2];
+const dealCard = (w, idx, i, rv) => cardHTML(w, idx, { deal: true, rv, i, rz: RZ[i % RZ.length] });
+const heroColHTML = (w, rv) =>
+  `<div class="hero-col"><div class="hero-raise">${cardHTML(w, '01', { cls: 'fcard3d', rv })}</div>${labelHTML(w)}</div>`;
 
 /* ===== 渲染（幂等；开场演出只播首次） ===== */
 async function render() {
   const first = !document.body.classList.contains('on');
   const rv = first ? ' rv0' : '';
-  const backrow = document.getElementById('backrow');
   const front = document.getElementById('front');
 
   let works;
   try {
     works = await Works.byTag(document.body.dataset.tag || '*');
   } catch (e) {
-    backrow.innerHTML = '';
     front.innerHTML = `<p class="error mono">${esc(i18n.t('err.load'))}</p>`;
     document.body.classList.add('on');
     return;
@@ -98,20 +102,24 @@ async function render() {
   if (cnt) cnt.textContent =
     i18n.t(i18n.lang === 'en' && works.length === 1 ? 'entry.countOne' : 'entry.count').replace('{n}', works.length);
 
-  if (!works.length) { backrow.innerHTML = ''; front.innerHTML = ''; document.body.classList.add('on'); return; }
+  if (!works.length) { front.innerHTML = ''; document.body.classList.add('on'); return; }
   const [lead, ...rest] = works;
-  const RZ = [-1.7, 1.3, -1.1, 1.8, -1.4, 1.6, -1.9, 1.2];
-  backrow.innerHTML = rest.map((w, i) =>
-    cardHTML(w, String(i + 2).padStart(2, '0'), { deal: true, rv, i, rz: RZ[i % RZ.length] })).join('');
-  front.innerHTML = cardHTML(lead, '01', { cls: 'fcard3d', rv }) + labelHTML(lead);
-  front.closest('.stage').classList.toggle('solo', rest.length === 0);
+  /* 同排行：hero 连浮字整体占行首（左上第一），其余随行，放不下自动换行 */
+  const cells = [heroColHTML(lead, rv),
+    ...rest.map((w, i) => dealCard(w, String(i + 2).padStart(2, '0'), i + 1, rv))];
+  front.innerHTML = `<div class="stage-line">${cells.join('')}</div>`;
   document.body.classList.add('on');
   const card = front.querySelector('.fcard3d');
+  if (!card) return;
   if (!first || SHOT || REDUCE) {
     card.classList.add('open');            /* 落定态 = 横排满图面：非首次/截图/减弱动态直接到位 */
   } else {
-    /* 出场演出：拿进（示竖排正面）→ 45° 翻到横排满图面 → 常驻横排 */
-    setTimeout(() => card.classList.add('open'), 1000);
+    /* 出场演出：拿进（示竖排正面，浮字净空）→ 45° 翻到横排满图面，浮字随翻面渐显 */
+    front.querySelector('.flabel').classList.add('hold');
+    setTimeout(() => {
+      card.classList.add('open');
+      front.querySelector('.flabel').classList.remove('hold');
+    }, 1000);
   }
 }
 

@@ -1,4 +1,4 @@
-/* identity.css — 身份页「摊牌」：牌桌 + 主打卡 45° 翻面 + 背排小卡（方案N 制式）
+/* identity.css — 身份页「摊牌」：牌桌 + 同排行（主打卡连浮字占行首 + 小卡随行）+ 主打卡 45° 翻面（方案N 制式）
    仅四个身份页（ta / program / ai-art / art）加载；顶栏与页脚沿用 style.css。
    制式要点：
    - 卡 268:386（首页制式）；边框 cqmin 化：内框线 3cqmin≈8px，画窗左右 6.35cqmin≈17px
@@ -89,10 +89,8 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
   perspective: 1600px;
   perspective-origin: 50% 30%;
 }
-/* solo（无背排）时 front 上下双 auto 居中；厚桌时首尾 auto 对分 */
-.stage.solo > :first-child { margin-top: auto; margin-bottom: auto; }
-.stage:not(.solo) > :first-child { margin-top: auto; }
-.stage:not(.solo) > :last-child { margin-bottom: auto; }
+/* 同排行并入 front 后，front 是 stage 唯一可见子块：上下双 auto 居中 */
+.stage > .front { margin-top: auto; margin-bottom: auto; }
 
 /* ---------- 卡类：同一个类，正面竖排，背面横排满图 ---------- */
 /* 小卡脚印 = 竖排（268:386）；主打卡脚印 = 横排落定态（见 .fhold），竖排卡在其中居中翻转 */
@@ -286,7 +284,9 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  transition: opacity 0.55s ease 0.15s;   /* 出场时随 45° 翻面渐显 */
 }
+.flabel.hold { opacity: 0; }              /* 翻面前的净空：置顶卡示竖排正面时不露浮字 */
 .fname2 {
   margin: 0;
   font-size: clamp(21px, 2vw, 27px);
@@ -317,17 +317,16 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
 /* 数据加载失败的占位（同 style.css .error 色） */
 .front .error { color: #ff9a9a; }
 
-/* ---------- 背排：桌上摆的牌 ---------- */
-.backrow {
+/* ---------- 同排行：hero 连浮字整体占行首，其余随行，放不下自动换行 ---------- */
+.stage-line {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: clamp(14px, 2vh, 22px) clamp(14px, 2vw, 64px);   /* 列距随屏长摊开（封顶 64） */
-  transform: rotateX(5deg);
-  transform-style: preserve-3d;
 }
-.backrow:empty { display: none; }
+.hero-col { display: flex; flex-direction: column; align-items: center; }
+.hero-raise { transform: translateY(-12px); }
 .deal { transform-style: preserve-3d; }
 
 /* ---------- 开场演出：摊牌（一轮，不阻断） ---------- */
@@ -349,7 +348,7 @@ html.shot *, html.shot *::before, html.shot *::after { animation: none !importan
 html.shot .rv0 { opacity: 1 !important; }
 @media (prefers-reduced-motion: reduce) {
   .rv0 { opacity: 1 !important; animation: none !important; }
-  .lift, .flip, .pcover img { transition: none !important; }
+  .lift, .flip, .pcover img, .flabel { transition: none !important; }
 }
 
 /* ---------- 竖屏 ≤720px ---------- */
@@ -360,15 +359,15 @@ html.shot .rv0 { opacity: 1 !important; }
   html[data-lang="en"] .mark { font-size: clamp(24px, 7vw, 36px); }
   .plaque { margin-top: 7px; font-size: 10px; letter-spacing: 0.2em; gap: 10px; }
   .stage { gap: 20px; padding: 14px 0 30px; }
-  .front .fhold { width: min(100%, 372px); }
-  .flabel { margin-top: 13px; gap: 6px; }
-  .backrow {
-    transform: none;
+  .stage-line {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 13px;
     width: 100%;
   }
+  .stage-line .hero-col { grid-column: 1 / -1; }
+  .hero-raise { transform: none; }
+  .stage-line .fhold { width: 100%; }
   .wcard { width: 100%; }
   .pname { font-size: 14px; }
 }
