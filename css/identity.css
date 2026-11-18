@@ -320,13 +320,21 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
 /* 数据加载失败的占位（同 style.css .error 色） */
 .front .error { color: #ff9a9a; }
 
-/* ---------- 同排行：hero 连浮字整体占行首，其余随行，放不下自动换行 ---------- */
+/* ---------- 同排行：hero 连浮字整体占行首，其余随行；
+   行由 JS 均衡切分（layoutRows，宽度 DP——原生 flex-wrap 会孤出 1-2 张卡） ---------- */
 .stage-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: clamp(14px, 2vh, 22px);
+}
+.srow {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: clamp(14px, 2vh, 22px) clamp(14px, 2vw, 64px);   /* 列距随屏长摊开（封顶 64） */
+  max-width: 100%;
 }
 .hero-col { display: flex; flex-direction: column; align-items: center; }
 .hero-raise { transform: translateY(-12px); }
@@ -368,6 +376,7 @@ html.shot .rv0 { opacity: 1 !important; }
     gap: 13px;
     width: 100%;
   }
+  .stage-line .srow { display: contents; }   /* 窄屏行容器透明化，卡直接进两列网格 */
   .stage-line .hero-col { grid-column: 1 / -1; }
   .hero-raise { transform: none; }
   .stage-line .fhold { width: 100%; }

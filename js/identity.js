@@ -84,6 +84,52 @@ const dealCard = (w, idx, i, rv) => cardHTML(w, idx, { deal: true, rv, i, rz: RZ
 const heroColHTML = (w, rv) =>
   `<div class="hero-col"><div class="hero-raise">${cardHTML(w, '01', { cls: 'fcard3d', rv })}</div>${labelHTML(w)}</div>`;
 
+/* ===== 同排行均衡分行：按宽度 DP 求最优切分 =====
+   行数取「能放下的最小值」，切分点令各行宽差最小（保序，hero 恒在行首）——
+   浏览器原生 flex-wrap 是贪心换行，会孤出 1-2 张卡，宽差悬殊 */
+function layoutRows() {
+  const line = document.querySelector('.stage-line');
+  if (!line) return;
+  const cells = [...line.children].flatMap(
+    el => el.classList.contains('srow') ? [...el.children] : [el]);
+  const n = cells.length;
+  if (!n) return;
+  const avail = line.clientWidth;
+  const gap = Math.min(Math.max(innerWidth * 0.02, 14), 64);   /* 与 css clamp(14px,2vw,64px) 同式 */
+  const prefix = [0];
+  cells.forEach((c, i) => prefix.push(prefix[i] + c.offsetWidth + (i ? gap : 0)));
+  const segW = (i, j) => prefix[j] - prefix[i] + (j - i - 1) * gap;   /* cells[i..j) 的行宽 */
+
+  let K = n, cuts = null;
+  for (let k = 1; k <= n && !cuts; k++) {
+    const dp = Array.from({ length: k + 1 }, () => Array(n + 1).fill(Infinity));
+    const cut = Array.from({ length: k + 1 }, () => Array(n + 1).fill(0));
+    dp[0][0] = 0;
+    for (let r = 1; r <= k; r++)
+      for (let j = r; j <= n; j++)
+        for (let i = r - 1; i < j; i++) {
+          if (dp[r - 1][i] === Infinity) continue;
+          const m = Math.max(dp[r - 1][i], segW(i, j));
+          if (m < dp[r][j]) { dp[r][j] = m; cut[r][j] = i; }
+        }
+    if (dp[k][n] <= avail) { K = k; cuts = cut; }
+  }
+  const bounds = [];
+  if (cuts) {
+    for (let j = n, k = K; k >= 1; k--) { bounds.unshift([cuts[k][j], j]); j = bounds[0][0]; }
+  } else {
+    /* 兜底：连单卡行都放不下（极端窄）→ 逐卡成行 */
+    bounds.push(...cells.map((c, i) => [i, i + 1]));
+  }
+  line.innerHTML = '';
+  bounds.forEach(([i, j]) => {
+    const row = document.createElement('div');
+    row.className = 'srow';
+    row.append(...cells.slice(i, j));
+    line.append(row);
+  });
+}
+
 /* ===== 渲染（幂等；开场演出只播首次） ===== */
 async function render() {
   const first = !document.body.classList.contains('on');
@@ -110,6 +156,7 @@ async function render() {
     ...rest.map((w, i) => dealCard(w, String(i + 2).padStart(2, '0'), i + 1, rv))];
   front.innerHTML = `<div class="stage-line">${cells.join('')}</div>`;
   document.body.classList.add('on');
+  layoutRows();
   const card = front.querySelector('.fcard3d');
   if (!card) return;
   const label = front.querySelector('.flabel');
@@ -312,3 +359,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await render();
   startFelt();
 });
+let rzT = 0;
+addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(layoutRows, 120); });
