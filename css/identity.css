@@ -1,0 +1,374 @@
+/* identity.css — 身份页「摊牌」：牌桌 + 主打卡 45° 翻面 + 背排小卡（方案N 制式）
+   仅四个身份页（ta / program / ai-art / art）加载；顶栏与页脚沿用 style.css。
+   制式要点：
+   - 卡 268:386（首页制式）；边框 cqmin 化：内框线 3cqmin≈8px，画窗左右 6.35cqmin≈17px
+     （离线净空 8px，卡缘→线→图 双八），背面满图边距 3.36cqmin≈9px 贴线；
+   - 画窗比 184:125 = 背面满图位同比——正面画窗即背面取景，封面一图两面共用；
+   - 宽屏摊开：顶栏/桌不封顶（pad 随屏长 clamp 贴边），背排列距 2vw 封顶 64；
+     卡牌制式尺寸（268/408）是牌的物性，永不随屏放大；
+   - 悬浮判定原位：hover 挂静止 .card3d 脚印，位移/微旋走内层 .lift。
+*/
+
+body { min-height: 100dvh; }
+
+/* 暗室：身份色微光 + 暗角（织物业 canvas 之上再压一层暗角） */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 560px at 50% 30%, color-mix(in srgb, var(--pg) 7%, transparent), transparent 70%),
+    radial-gradient(125% 100% at 50% 40%, transparent 48%, rgba(2, 3, 6, 0.72) 100%);
+}
+
+/* 桌面织物（identity.js 逐身份绘制） */
+#felt {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(115% 92% at 50% 32%, #000 34%, transparent 82%);
+  mask-image: radial-gradient(115% 92% at 50% 32%, #000 34%, transparent 82%);
+}
+
+/* 全宽桌（同首页全宽舞台逻辑）：摊开随屏长生长 */
+main {
+  max-width: none;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+.table {
+  padding: 0 clamp(28px, 3.5vw, 80px) 80px;
+  min-height: calc(100dvh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- 刻在桌上的身份 ---------- */
+.engrave { text-align: center; padding-top: clamp(12px, 2.4vh, 26px); user-select: none; }
+.mark {
+  margin: 0;
+  font-size: clamp(40px, 4.4vw, 62px);
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  padding-left: 0.16em;
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--pg) 8%, #10121a);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.55), 0 -1px 0 rgba(255, 255, 255, 0.035);
+}
+html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 0.1em; padding-left: 0.1em; }
+.plaque {
+  margin: 7px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+}
+.plaque .no { color: color-mix(in srgb, var(--pg) 62%, transparent); }
+.plaque .cnt { color: var(--pg); }
+.plaque .dot { color: var(--border-strong); }
+.plaque [data-i18n^="enlabel"]:empty + .dot.d2 { display: none; }
+
+/* ---------- 牌桌舞台：拿起的牌在上，桌上牌在下 ---------- */
+.stage {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2vh, 22px);
+  padding: clamp(6px, 1.2vh, 16px) 0 clamp(16px, 2.6vh, 30px);
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+}
+/* solo（无背排）时 front 上下双 auto 居中；厚桌时首尾 auto 对分 */
+.stage.solo > :first-child { margin-top: auto; margin-bottom: auto; }
+.stage:not(.solo) > :first-child { margin-top: auto; }
+.stage:not(.solo) > :last-child { margin-bottom: auto; }
+
+/* ---------- 卡类：同一个类，正面竖排，背面横排满图 ---------- */
+/* 小卡脚印 = 竖排（268:386）；主打卡脚印 = 横排落定态（见 .fhold），竖排卡在其中居中翻转 */
+.card3d {
+  position: relative;
+  display: block;
+  aspect-ratio: 268 / 386;
+  transform-style: preserve-3d;
+  perspective: 1100px;
+  container-type: size;   /* 背面的 cqh/cqw 取所在脚印尺寸 */
+  cursor: pointer;
+}
+/* 悬浮位移的内层：hover 判定留在 .card3d 静止脚印上，视觉动它——边缘不抖 */
+.lift {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+/* 小卡与首页同尺寸：268px 封顶，窄屏按同比例缩（18.6vw = 268/1440） */
+.wcard { width: min(268px, 18.6vw); }
+/* 主打卡：竖排盒在横排脚印内居中——翻完 180° 恰好填满脚印 */
+.fcard3d {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  translate: -50% -50%;
+}
+.card3d:focus { outline: none; }
+/* 悬浮 = 简单上浮，不翻面；判定原位（.card3d 不动），位移/微旋在内层 .lift */
+.card3d:hover, .card3d:focus-visible { z-index: 6; }
+.card3d:hover .lift, .card3d:focus-visible .lift {
+  transform: rotateZ(var(--rz, 0deg)) translateY(-10px);
+}
+.flip {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.42, 0.5, 0.2, 1);
+}
+/* 45° 斜轴翻面：仅主打卡出场一次（.open 由 JS 挂上后常驻） */
+.card3d.open .flip {
+  transform: rotate3d(1, 1, 0, 180deg);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid color-mix(in srgb, var(--pg) 30%, transparent);
+  background:
+    radial-gradient(130% 95% at 50% 22%, color-mix(in srgb, var(--pg) 9%, transparent), transparent 62%),
+    repeating-linear-gradient(115deg, rgba(233, 240, 250, 0.014) 0 1px, transparent 1px 7px),
+    linear-gradient(168deg, #181b2a, #10121a 58%, #141726);
+  box-shadow: 0 22px 44px -22px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.card3d:hover .face, .card3d:focus-visible .face {
+  border-color: color-mix(in srgb, var(--pg) 62%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pg) 24%, transparent),
+    0 18px 56px -18px color-mix(in srgb, var(--pg) 34%, transparent),
+    0 26px 50px -26px rgba(0, 0, 0, 0.85);
+}
+/* 内框细线：两面同制式，坐在卡底色上（图嵌在线内，不压线）。3cqmin ≈ 8px@268 */
+.face::before {
+  content: "";
+  position: absolute;
+  inset: 3cqmin;
+  border: 1px solid rgba(233, 240, 250, 0.16);
+  border-radius: 9px;
+  pointer-events: none;
+  z-index: 3;
+}
+/* 背面：横排满图（短边撑满）+ 遮罩，同款边框制式压在图上，无角标。
+   满图边距 3.36cqmin ≈ 9px@268：嵌在内框线（3cqmin+1px 线宽）内侧贴线齐平——
+   背面走「纹样通到框」的满图逻辑，与正面画窗的离线净空不同制。
+   尺寸 = 竖排脚印的宽高互换，绕同一根 45° 轴预翻转——
+   盒翻 180° 后两斜轴对消（M45·M45 = I），背面以横卡轮廓正立落定 */
+.fback {
+  left: 50%;
+  top: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  translate: -50% -50%;
+  transform: rotate3d(1, 1, 0, 180deg);
+}
+.bimg {
+  position: absolute;
+  left: 3.36cqmin;
+  top: 3.36cqmin;
+  /* img 是替换元素：inset 四边定位对它无效（right/bottom 被忽略），
+     必须显式尺寸——否则按图片原始尺寸绘制，底部空、右侧超 */
+  width: calc(100% - 6.72cqmin);
+  height: calc(100% - 6.72cqmin);
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+}
+.bscrim {
+  position: absolute;
+  inset: 3.36cqmin;
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, rgba(4, 5, 8, 0.2), transparent 28%),
+    linear-gradient(0deg, rgba(4, 5, 8, 0.24), transparent 32%),
+    radial-gradient(125% 95% at 50% 50%, transparent 64%, rgba(4, 5, 8, 0.34));
+}
+
+/* ---------- 牌面公共元素 ---------- */
+.cidx {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--pg);
+  opacity: 0.75;
+  z-index: 3;
+}
+.cidx.tl { top: 4.8%; left: 8.5%; }
+.cidx.br { bottom: 4.8%; right: 8.5%; transform: rotate(180deg); }
+/* 正面（竖排）：图片与名位整体下移，给角标留净空。
+   注意 padding 百分比按「宽度」解析：卡高 = 1.44 宽，
+   要占高度 f% 就写 f×1.44 的宽度百分比（13% 高 ≈ 18.7% 宽） */
+.pbody {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18.5% 6.35cqmin 9.5%;   /* 左右 ≈17px：画窗离内框线（3cqmin≈8px + 1px 线宽）净空 8px，与线位等宽 */
+}
+.pcover {
+  width: 100%;
+  aspect-ratio: 184 / 125;   /* = 背面满图位（386:268 脚印减四边 3.36cqmin）同比：
+                                正面画窗即背面取景，封面一图两面共用，翻面 = 同画放大 */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  flex: none;
+}
+.pcover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s;
+}
+.card3d:hover .pcover img { transform: scale(1.05); }
+.pname {
+  margin: 6% 0 0;
+  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-align: center;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--pg) 26%, transparent), 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+.pmeta {
+  margin: 3.2% 0 0;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  display: flex;
+  gap: 9px;
+  white-space: nowrap;
+}
+.pmeta .type { color: color-mix(in srgb, var(--pg) 78%, transparent); }
+.ppip {
+  width: 6px;
+  height: 6px;
+  margin: auto 0 0;
+  background: var(--pg);
+  opacity: 0.42;
+  transform: rotate(45deg);
+  flex: none;
+}
+
+/* ---------- 主打卡的字：浮在卡下方桌面上（卡面只有图；无链接行——整卡即入口） ---------- */
+.flabel {
+  margin: 16px auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.fname2 {
+  margin: 0;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  padding-left: 0.16em;
+  text-shadow: 0 0 26px color-mix(in srgb, var(--pg) 32%, transparent), 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+.fmeta2 {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  display: flex;
+  gap: 12px;
+}
+.fmeta2 .type { color: color-mix(in srgb, var(--pg) 82%, transparent); }
+
+/* ---------- 拿起的牌（主打卡）：脚印 = 横排落定态 ---------- */
+.front { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.fhold {
+  position: relative;
+  width: clamp(330px, 28.5vw, 408px);
+  aspect-ratio: 386 / 268;
+  transform-style: preserve-3d;
+  container-type: size;
+}
+/* 数据加载失败的占位（同 style.css .error 色） */
+.front .error { color: #ff9a9a; }
+
+/* ---------- 背排：桌上摆的牌 ---------- */
+.backrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(14px, 2vh, 22px) clamp(14px, 2vw, 64px);   /* 列距随屏长摊开（封顶 64） */
+  transform: rotateX(5deg);
+  transform-style: preserve-3d;
+}
+.backrow:empty { display: none; }
+.deal { transform-style: preserve-3d; }
+
+/* ---------- 开场演出：摊牌（一轮，不阻断） ---------- */
+body:not(.on) .rv0 { opacity: 0; }
+html:not(.shot) body.on .engrave.rv0 { animation: etch 0.6s ease backwards; }
+html:not(.shot) body.on .deal.rv0 { animation: dealout 0.5s cubic-bezier(0.22, 0.75, 0.25, 1) backwards;
+  animation-delay: calc(0.34s + var(--i, 0) * 0.06s); }
+html:not(.shot) body.on .fhold.rv0 { animation: drawin 0.6s cubic-bezier(0.3, 0.7, 0.24, 1) 0.15s backwards,
+  floaty 6s ease-in-out 1.5s infinite; }
+@keyframes etch { from { opacity: 0; letter-spacing: 0.34em; } }
+@keyframes dealout { from { opacity: 0; transform: translateY(96px); } }
+@keyframes drawin { from { opacity: 0; transform: translate(30%, 70%) rotateZ(4deg) scale(0.95); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* ---------- 截图模式 / 减弱动态 ---------- */
+html.shot, html.shot body { width: var(--sw); height: var(--sh); overflow: hidden; }
+html.shot body { position: relative; }
+html.shot *, html.shot *::before, html.shot *::after { animation: none !important; transition: none !important; }
+html.shot .rv0 { opacity: 1 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .rv0 { opacity: 1 !important; animation: none !important; }
+  .lift, .flip, .pcover img { transition: none !important; }
+}
+
+/* ---------- 竖屏 ≤720px ---------- */
+@media (max-width: 720px) {
+  .table { padding: 0 16px 60px; }
+  .engrave { padding-top: 18px; }
+  .mark { font-size: clamp(30px, 8.6vw, 44px); letter-spacing: 0.12em; }
+  html[data-lang="en"] .mark { font-size: clamp(24px, 7vw, 36px); }
+  .plaque { margin-top: 7px; font-size: 10px; letter-spacing: 0.2em; gap: 10px; }
+  .stage { gap: 20px; padding: 14px 0 30px; }
+  .front .fhold { width: min(100%, 372px); }
+  .flabel { margin-top: 13px; gap: 6px; }
+  .backrow {
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    width: 100%;
+  }
+  .wcard { width: 100%; }
+  .pname { font-size: 14px; }
+}

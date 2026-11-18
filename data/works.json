@@ -63,7 +63,6 @@
     "roleEn": "Programmer / Technical Artist",
     "tech": [
       "UE 5",
-      "C++",
       "蓝图"
     ],
     "cover": "img/covers/phase-protocol.jpg",
@@ -90,10 +89,10 @@
   },
   {
     "id": "solar-system-nav",
-    "title": "太阳系航行模拟器",
+    "title": "太阳系航行模拟",
     "titleEn": "Solar System Navigation",
-    "desc": "Processing 创意编程：开普勒轨道力学驱动的航天器发射与行星际转移模拟器。",
-    "descEn": "A Processing creative-coding piece: a spacecraft launch and interplanetary transfer simulator driven by Keplerian orbital mechanics.",
+    "desc": "Processing 创意编程课程作品：开普勒轨道力学驱动的航天器发射与行星际转移模拟。",
+    "descEn": "A Processing creative-coding course project: a spacecraft launch and interplanetary transfer simulation driven by Keplerian orbital mechanics.",
     "detail": "从发射台点火、重力转弯、PEG 圆化进入近地轨道，到霍曼转移奔赴其他行星、被目标捕获——完整任务流程都建立在真实轨道力学上：开普勒方程解析传播、大气指数密度模型、KSP 风格的影响球（SOI）自动切换参考系。\n\n美术全部程序化生成：无外部资源，天体按屏幕半径分四级 LOD 渲染，木星条纹与大红斑、土星三层星环的正确遮挡、太阳日珥脉动都由代码绘制；时间加速带三重保护，保证关键事件不被跳过。\n\n制导算法与轨道传播分离的 KSP 式分层架构，燃料与多级火箭等复杂度刻意留白，专注于实时可视化的表现力。",
     "detailEn": "From pad ignition, gravity turn and PEG circularization into LEO, to a Hohmann transfer toward another planet and capture — the full mission runs on real orbital mechanics: analytic Kepler propagation, an exponential atmosphere model, and KSP-style spheres of influence that switch reference frames automatically.\n\nAll visuals are procedural: no external assets. Bodies render across four LOD tiers by on-screen radius; Jupiter's bands and Great Red Spot, Saturn's three-layer rings with correct occlusion, and the Sun's pulsing prominences are all drawn in code. Time acceleration carries triple safeguards so no critical event gets skipped.\n\nA KSP-style layered architecture separates guidance from orbit propagation; fuel and multi-stage rockets are deliberately out of scope to keep the focus on expressive real-time visualization.",
     "type": "artwork",

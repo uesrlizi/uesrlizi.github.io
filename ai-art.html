@@ -7,8 +7,9 @@
   <meta name="description" content="AI 场景美术方向作品——AI 辅助生成的场景与概念图。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e0f13'/%3E%3Cpath d='M8 22V10l8 8 8-8v12' stroke='%235eead4' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css?v=8">
+  <link rel="stylesheet" href="css/identity.css?v=1">
 </head>
-<body data-page="list" data-tag="AI场景美术" data-title-key="page.ai" data-accent="violet">
+<body data-page="identity" data-tag="AI场景美术" data-title-key="page.ai" data-accent="violet">
   <header class="site-header">
     <div class="header-inner">
       <a class="logo" href="index.html"><img class="logo-avatar" src="img/avatar.jpg" alt=""><span data-i18n="site.name">李璟涵</span></a>
@@ -17,20 +18,26 @@
     </div>
   </header>
 
+  <canvas id="felt"></canvas>
+
   <main>
-    <section class="page-head">
-      <span class="ph-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="8" y="10" width="32" height="28" rx="3"/>
-        <path d="M12 36.5 L20 23 L25 30 L30 24.5 L36 36.5"/>
-        <circle cx="32.5" cy="17" r="3"/>
-        <path d="M15.5 11.5 C15.9 14 17 15.1 19.5 15.5 C17 15.9 15.9 17 15.5 19.5 C15.1 17 14 15.9 11.5 15.5 C14 15.1 15.1 14 15.5 11.5 Z" fill="currentColor" stroke="none"/>
-      </svg></span>
-      <div>
-        <h1 data-i18n="page.ai">AI场景美术</h1>
-        <p class="ph-sub mono"><span data-i18n="enlabel.ai">AI SCENE ART</span><span class="dot"> · </span><span class="cnt" data-count-tag="AI场景美术"></span></p>
+    <section class="table">
+      <div class="engrave rv0">
+        <h1 class="mark" data-i18n="page.ai">AI场景美术</h1>
+        <p class="plaque mono">
+          <span class="no">03</span>
+          <span class="dot">·</span>
+          <span data-i18n="enlabel.ai">AI SCENE ART</span>
+          <span class="dot d2">·</span>
+          <span class="cnt" id="plaque-cnt"></span>
+        </p>
+      </div>
+
+      <div class="stage">
+        <div class="front" id="front"></div>
+        <div class="backrow" id="backrow"></div>
       </div>
     </section>
-    <section class="grid" id="grid"></section>
   </main>
 
   <footer class="site-footer">
@@ -42,13 +49,6 @@
 
   <script src="js/i18n.js?v=7"></script>
   <script src="js/data.js?v=2"></script>
-  <script src="js/render.js?v=5"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      i18n.init();
-      await Promise.all([renderList(), fillEntryCounts()]);
-      window.addEventListener('langchange', () => { renderList(); fillEntryCounts(); });
-    });
-  </script>
+  <script src="js/identity.js?v=1"></script>
 </body>
 </html>
