@@ -1,7 +1,8 @@
 /* identity.js — 身份页「摊牌」渲染（方案N 制式，四个身份页共用）
    - 数据：Works.byTag(body[data-tag])，置顶优先、日期倒序；第一件 = 主打卡，其余 = 同排行小卡
    - 同排行：hero 连浮字作整体占行首（左上第一），其余随行，放不下自动换行
-   - 主打卡常驻横排满图面：出场拿进示竖排正面（浮字净空）→ 45° 斜轴翻一次，浮字随翻面渐显
+   - 主打卡：出场拿进示竖排正面（浮字净空）→ 45° 斜轴翻一次落定横排满图；
+     hover 翻回竖排正面（浮字同步净空），移出翻回——反转状态与浮字显隐完全联动
    - 小卡永远竖排正面；悬浮 = 判定原位的简单上浮（见 identity.css .lift）
    - 桌面织物：逐身份画场（节点网络 / 字符雨 / 极光浮斑 / 锈红墨痕），同种子稳定
    - 语言：i18n.js 广播 langchange 后原地重渲染；?lang 深链由 i18n.js 处理
@@ -111,16 +112,30 @@ async function render() {
   document.body.classList.add('on');
   const card = front.querySelector('.fcard3d');
   if (!card) return;
-  if (!first || SHOT || REDUCE) {
-    card.classList.add('open');            /* 落定态 = 横排满图面：非首次/截图/减弱动态直接到位 */
-  } else {
+  const label = front.querySelector('.flabel');
+  let entered = !first;                  /* 开场演出未结束前，hover 不干预翻面 */
+  if (first && !SHOT && !REDUCE) {
     /* 出场演出：拿进（示竖排正面，浮字净空）→ 45° 翻到横排满图面，浮字随翻面渐显 */
-    front.querySelector('.flabel').classList.add('hold');
+    label.classList.add('hold');
     setTimeout(() => {
       card.classList.add('open');
-      front.querySelector('.flabel').classList.remove('hold');
+      label.classList.remove('hold');
+      entered = true;
     }, 1000);
+  } else {
+    card.classList.add('open');          /* 非首次/截图/减弱动态：直接落定横排 */
   }
+  /* hover 翻回竖排正面（看得出台是牌），移出翻回横排满图——浮字完全跟随反转状态 */
+  card.addEventListener('mouseenter', () => {
+    if (!entered) return;
+    card.classList.remove('open');
+    label.classList.add('hold');
+  });
+  card.addEventListener('mouseleave', () => {
+    if (!entered) return;
+    card.classList.add('open');
+    label.classList.remove('hold');
+  });
 }
 
 /* ===== 主打卡整块 = 一个点击目标 ===== */

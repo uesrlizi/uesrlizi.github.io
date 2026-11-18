@@ -133,7 +133,7 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
   transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.42, 0.5, 0.2, 1);
 }
-/* 45° 斜轴翻面：仅主打卡出场一次（.open 由 JS 挂上后常驻） */
+/* 45° 斜轴翻面：出场一次 + hover 翻回正面（.open 跟随反转状态，浮字同步净空/渐显） */
 .card3d.open .flip {
   transform: rotate3d(1, 1, 0, 180deg);
 }
@@ -286,7 +286,10 @@ html[data-lang="en"] .mark { font-size: clamp(30px, 4vw, 56px); letter-spacing: 
   gap: 8px;
   transition: opacity 0.55s ease 0.15s;   /* 出场时随 45° 翻面渐显 */
 }
-.flabel.hold { opacity: 0; }              /* 翻面前的净空：置顶卡示竖排正面时不露浮字 */
+.flabel.hold {
+  opacity: 0;
+  transition: opacity 0.3s ease;          /* 净空快出：翻回竖排正面时不与卡面标题叠字 */
+}
 .fname2 {
   margin: 0;
   font-size: clamp(21px, 2vw, 27px);
