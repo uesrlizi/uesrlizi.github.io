@@ -379,6 +379,8 @@ html.shot .rv0 { opacity: 1 !important; }
   .stage-line .srow { display: contents; }   /* 窄屏行容器透明化，卡直接进两列网格 */
   .stage-line .hero-col { grid-column: 1 / -1; }
   .hero-raise { transform: none; }
+  /* hero-raise 定宽：断开 fhold width:100% ↔ 父级 fit-content 的循环解析（否则卡 0×0 消失） */
+  .stage-line .hero-raise { width: 100%; }
   .stage-line .fhold { width: 100%; }
   .wcard { width: 100%; }
   .pname { font-size: 14px; }
