@@ -112,29 +112,34 @@ function detailHTML(w, lang) {
   ${linkBtns ? `<div class="detail-links">${linkBtns}</div>` : ''}`;
 }
 
-/* 详情页"返回"链接：从哪个分类进来就回哪个分类（读 referrer），
-   直接打开/来源不明则回落全部档案。*/
+/* 详情页顶栏"返回列表"：目标是来源列表页（读 referrer）；
+   直接打开/来源不明则按作品首个身份标签落分类，纯档案作品落全部档案。*/
 const ROUTE_PAGES = {
-  'ta.html': 'page.ta',
-  'program.html': 'page.program',
-  'ai-art.html': 'page.ai',
-  'art.html': 'page.art',
-  'archive.html': 'page.archive',
+  'ta.html': 'ta.html',
+  'program.html': 'program.html',
+  'ai-art.html': 'ai-art.html',
+  'art.html': 'art.html',
 };
-function applyBackLink() {
-  const backLink = document.querySelector('.back');
-  if (!backLink) return;
-  let key = 'page.archive';
+const TAG_LIST = {
+  '技术美术': 'ta.html',
+  '游戏工程师': 'program.html',
+  'AI场景美术': 'ai-art.html',
+  '申研作品集': 'art.html',
+};
+function backTarget(w) {
   try {
     const from = new URL(document.referrer).pathname.split('/').pop();
-    if (ROUTE_PAGES[from]) key = ROUTE_PAGES[from];
-  } catch (e) { /* referrer 不可用 → 回落 */ }
-  const name = i18n.t(key);
-  backLink.href = key === 'page.archive' ? 'archive.html'
-    : Object.keys(ROUTE_PAGES).find(h => ROUTE_PAGES[h] === key);
-  backLink.textContent = i18n.lang === 'en'
-    ? '← Back to ' + name
-    : '← 返回' + name;
+    if (ROUTE_PAGES[from]) return ROUTE_PAGES[from];
+  } catch (e) { /* referrer 不可用 → 标签回落 */ }
+  if (w) for (const t of (w.tags || [])) if (TAG_LIST[t]) return TAG_LIST[t];
+  return 'archive.html';
+}
+function applyBackLink(w) {
+  const href = backTarget(w);
+  document.querySelectorAll('.back, .back-top').forEach(el => {
+    el.href = href;
+    el.textContent = i18n.t('detail.backList');
+  });
 }
 
 async function renderDetail() {
@@ -158,6 +163,7 @@ async function renderDetail() {
       <a class="btn" href="archive.html">${esc(i18n.t('detail.notFoundHint'))}</a>
     </div>`;
     document.title = i18n.t('page.works') + ' · ' + i18n.t('site.name');
+    applyBackLink(null);
     return;
   }
 
@@ -168,7 +174,7 @@ async function renderDetail() {
 
   app.innerHTML = detailHTML(w, lang);
   document.title = pickField(w, 'title', lang) + ' · ' + i18n.t('site.name');
-  applyBackLink();
+  applyBackLink(w);
   bindLightbox(app);
 }
 

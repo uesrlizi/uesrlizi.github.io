@@ -19,11 +19,6 @@ const I18N = {
     'page.archive': '全部档案',
     'page.works': '作品详情',
 
-    'nav.home': '首页',
-    'nav.ta': '技术美术',
-    'nav.program': '游戏工程师',
-    'nav.ai': 'AI场景美术',
-    'nav.art': '申研作品集',
     'nav.archive': '全部档案',
 
     /* 首页：zh 态的英文影子行（en 态隐藏，标题本身已是英文） */
@@ -42,6 +37,7 @@ const I18N = {
     'err.load': '作品数据加载失败，请刷新重试。',
 
     'detail.back': '← 返回全部档案',
+    'detail.backList': '← 返回列表',
     'detail.watchOnBili': '在 Bilibili 打开 ▸',
     'detail.watchOnYT': 'YouTube 版 ▸',
     'detail.itch': 'itch.io 页面 ▸',
@@ -68,11 +64,6 @@ const I18N = {
     'page.archive': 'Archive',
     'page.works': 'Work',
 
-    'nav.home': 'Home',
-    'nav.ta': 'Tech Art',
-    'nav.program': 'Game Eng',
-    'nav.ai': 'AI Scene',
-    'nav.art': 'Portfolio',
     'nav.archive': 'Archive',
 
     'home.question': 'What are you looking for?',
@@ -90,6 +81,7 @@ const I18N = {
     'err.load': 'Failed to load works data. Please refresh.',
 
     'detail.back': '← Back to archive',
+    'detail.backList': '← Back to list',
     'detail.watchOnBili': 'Open on Bilibili ▸',
     'detail.watchOnYT': 'YouTube version ▸',
     'detail.itch': 'itch.io page ▸',
@@ -117,24 +109,6 @@ const i18n = {
     this.lang = (fromUrl || stored) === 'en' ? 'en' : 'zh';
     if (fromUrl) localStorage.setItem('portfolio-lang', this.lang);
     this.apply();
-    this.initNavToggle();
-  },
-
-  /* 移动端折叠菜单：汉堡开关 + 点链接/点外部收起 */
-  initNavToggle() {
-    const tgl = document.getElementById('nav-toggle');
-    if (!tgl) return;
-    const header = tgl.closest('.site-header');
-    const setOpen = (open) => {
-      header.classList.toggle('nav-open', open);
-      tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
-    };
-    tgl.addEventListener('click', () => setOpen(!header.classList.contains('nav-open')));
-    header.querySelectorAll('.nav-menu a').forEach(a =>
-      a.addEventListener('click', () => setOpen(false)));
-    document.addEventListener('click', e => {
-      if (header.classList.contains('nav-open') && !header.contains(e.target)) setOpen(false);
-    });
   },
 
   t(key) {
