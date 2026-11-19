@@ -5,6 +5,8 @@
      hover 翻回竖排正面（浮字同步净空），移出翻回——反转状态与浮字显隐完全联动
    - 小卡永远竖排正面；悬浮 = 判定原位的简单上浮（见 identity.css .lift）
    - 桌面织物：逐身份画场（节点网络 / 字符雨 / 极光浮斑 / 锈红墨痕），同种子稳定
+   - 全部档案（data-tag="*"）：均摊模式——无主打卡无浮字，全员竖排小卡 + 均衡分行；
+     画场用品牌青节点网络（seed 独立，与技术美术页不同构）
    - 语言：i18n.js 广播 langchange 后原地重渲染；?lang 深链由 i18n.js 处理
    - ?shot=WxH 截图模式：终态直达，动画全关
 */
@@ -27,8 +29,10 @@ const PAGES = {
   '游戏工程师': { key: 'program', seed: 22 },
   'AI场景美术': { key: 'ai',      seed: 33 },
   '申研作品集': { key: 'art',     seed: 44 },
+  '*':          { key: 'archive', seed: 55 },   /* 全部档案：均摊模式（FLAT） */
 };
 const PAGE = PAGES[document.body.dataset.tag] || PAGES['技术美术'];
+const FLAT = PAGE.key === 'archive';   /* 均摊：无主打卡，全员小卡 */
 
 /* ===== 卡类组件：正面竖排 / 背面横排满图（45° 轴翻转） ===== */
 function frontFace(w, idx, big) {
@@ -150,6 +154,14 @@ async function render() {
     i18n.t(i18n.lang === 'en' && works.length === 1 ? 'entry.countOne' : 'entry.count').replace('{n}', works.length);
 
   if (!works.length) { front.innerHTML = ''; document.body.classList.add('on'); return; }
+  /* 均摊模式（全部档案）：无主打卡——全员竖排小卡，序号 01 起，均衡分行 */
+  if (FLAT) {
+    const cells = works.map((w, i) => dealCard(w, String(i + 1).padStart(2, '0'), i, rv));
+    front.innerHTML = `<div class="stage-line">${cells.join('')}</div>`;
+    document.body.classList.add('on');
+    layoutRows();
+    return;
+  }
   const [lead, ...rest] = works;
   /* 同排行：hero 连浮字整体占行首（左上第一），其余随行，放不下自动换行 */
   const cells = [heroColHTML(lead, rv),
@@ -229,7 +241,7 @@ function mkStroke(rgb) {
 function buildField() {
   const R = mulberry32(PAGE.seed * 7919 + 13);
   const { w, h } = FIELD;
-  if (PAGE.key === 'ta') {
+  if (PAGE.key === 'ta' || PAGE.key === 'archive') {
     const n = Math.max(14, Math.min(30, Math.round(w * h / 48000)));
     FIELD.nodes = Array.from({ length: n }, () => ({
       x: R(), y: R(), vx: (R() < .5 ? -1 : 1) * (.006 + R() * .012), vy: (R() < .5 ? -1 : 1) * (.006 + R() * .012),
@@ -324,7 +336,7 @@ function drawAll(t, dt) {
   if (!FIELD) return;
   const e = (SHOT || REDUCE) ? .6 : .3 + .1 * Math.sin(t * .0004);
   g.clearRect(0, 0, FIELD.w, FIELD.h);
-  if (PAGE.key === 'ta') drawNodes(t / 1000, dt, e);
+  if (PAGE.key === 'ta' || PAGE.key === 'archive') drawNodes(t / 1000, dt, e);
   else if (PAGE.key === 'program') drawRain(dt, e);
   else drawBlobs(t / 1000, e);
 }
