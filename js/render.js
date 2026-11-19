@@ -131,13 +131,37 @@ const TAG_LIST = {
   'AI场景美术': 'ai-art.html',
   '申研作品集': 'art.html',
 };
-function backTarget(w) {
+/* 各身份列表页的桌面色：详情页强调色跟随来路（同返回链接一条 referrer 规则） */
+const ROUTE_ACCENT = {
+  'ta.html': 'teal',
+  'program.html': 'amber',
+  'ai-art.html': 'violet',
+  'art.html': 'rust',
+};
+const TAG_ACCENT = {
+  '技术美术': 'teal',
+  '游戏工程师': 'amber',
+  'AI场景美术': 'violet',
+  '申研作品集': 'rust',
+};
+function routeFromReferrer() {
   try {
     const from = new URL(document.referrer).pathname.split('/').pop();
-    if (ROUTE_PAGES[from]) return ROUTE_PAGES[from];
-  } catch (e) { /* referrer 不可用 → 标签回落 */ }
-  if (w) for (const t of (w.tags || [])) if (TAG_LIST[t]) return TAG_LIST[t];
-  return 'archive.html';
+    if (ROUTE_PAGES[from]) return from;
+  } catch (e) { /* referrer 不可用 */ }
+  return null;
+}
+function backTarget(w) {
+  return routeFromReferrer()
+    || (w && (w.tags || []).map(t => TAG_LIST[t]).find(Boolean))
+    || 'archive.html';
+}
+/* 强调色：从身份页进来染该身份色；档案/直链进（无身份来路）回落作品首标签；
+   纯档案作品（无任何身份标签）返回 null → 默认品牌青 */
+function accentFor(w) {
+  return ROUTE_ACCENT[routeFromReferrer()]
+    || (w && (w.tags || []).map(t => TAG_ACCENT[t]).find(Boolean))
+    || null;
 }
 function applyBackLink(w) {
   const href = backTarget(w);
@@ -172,10 +196,11 @@ async function renderDetail() {
     return;
   }
 
-  /* 详情页强调色跟随作品的第一条身份标签 */
-  const TAG_ACCENT = { '技术美术': 'teal', '游戏工程师': 'amber', 'AI场景美术': 'violet', '申研作品集': 'rust' };
-  const acc = (w.tags || []).map(t => TAG_ACCENT[t]).find(Boolean);
+  /* 强调色跟随来路列表（同返回链接的 referrer 规则）；无来路回落作品首标签；
+     语言切换重渲染时 accent 可能从有到无（如纯档案作品），需显式清掉旧值 */
+  const acc = accentFor(w);
   if (acc) document.body.dataset.accent = acc;
+  else delete document.body.dataset.accent;
 
   app.innerHTML = detailHTML(w, lang);
   document.title = pickField(w, 'title', lang) + ' · ' + i18n.t('site.name');
