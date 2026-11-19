@@ -101,8 +101,13 @@ function detailHTML(w, lang) {
 
   const chips = (w.tech || []).map(t => `<span class="chip mono">${esc(t)}</span>`).join('');
 
+  /* meta 行 = 铭牌制式（同身份页 plaque）：点分隔弱色、类型走身份色（.meta .dot / .meta .type） */
+  const metaHTML = `
+    <span>${esc(date)}</span><span class="dot">·</span>
+    <span class="type">${esc(type)}</span>${role ? `<span class="dot">·</span><span>${esc(role)}</span>` : ''}`;
+
   return `
-  <p class="meta mono">${esc(date)} · ${esc(type)}${role ? ' · ' + esc(role) : ''}</p>
+  <p class="meta mono">${metaHTML}</p>
   <h1>${esc(title)}</h1>
   <p class="lead">${esc(desc)}</p>
   ${videoBlock}

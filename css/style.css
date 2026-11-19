@@ -206,18 +206,24 @@ main {
 .card-meta .type { color: var(--pg); }
 .card h3 { margin: 0; font-size: 17px; }
 
-/* 技术栈小标签 */
+/* 技术栈小标签（轻染身份色，同首页计数徽章制式） */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   font-size: 11px;
   padding: 3px 9px;
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--pg) 22%, transparent);
   border-radius: 999px;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--pg) 68%, var(--muted));
   white-space: nowrap;
 }
 
-/* ---------- 详情页 ---------- */
+/* ---------- 详情页（同卡桌语言：身份色微光 + 铭牌 meta + 卡框媒体） ---------- */
+/* 暗室换身份色：顶灯微光 + 四角压暗（同身份页制式；强调色已随作品首标签） */
+body[data-page="detail"]::before {
+  background:
+    radial-gradient(900px 560px at 50% 10%, color-mix(in srgb, var(--pg) 7%, transparent), transparent 70%),
+    radial-gradient(125% 100% at 50% 38%, transparent 52%, rgba(2, 3, 6, 0.55) 100%);
+}
 .detail { max-width: 860px; margin: 0 auto; }
 .back {
   display: inline-block;
@@ -228,27 +234,37 @@ main {
   transition: 0.15s;
 }
 .back:hover { color: var(--pg); }
+/* meta 行 = 铭牌制式（同身份页 plaque）：mono 宽字距，点分隔弱色，类型走身份色 */
 .detail .meta {
-  color: var(--pg);
-  font-size: 12.5px;
-  letter-spacing: 0.08em;
-  margin: 18px 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  margin: 32px 0 12px;
 }
+.detail .meta .dot { color: var(--border-strong); }
+.detail .meta .type { color: var(--pg); }
 .detail h1 {
   font-size: clamp(26px, 4vw, 40px);
   font-weight: 800;
   margin: 0 0 12px;
+  text-shadow: 0 0 26px color-mix(in srgb, var(--pg) 20%, transparent), 0 2px 14px rgba(0, 0, 0, 0.55);
 }
 .detail .lead { color: var(--muted); font-size: 16px; line-height: 1.75; }
 
+/* 媒体 = 卡框制式：身份色细边 + 14px 圆角 + 黑色落影，hover 增亮 + 辉光（同卡 hover 语言） */
 .video-wrap {
   position: relative;
   aspect-ratio: 16 / 9;
   margin: 30px 0 10px;
   background: #000;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--pg) 30%, transparent);
+  border-radius: 14px;
   overflow: hidden;
+  box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.7);
 }
 .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 12.5px; margin: 0 0 6px; }
@@ -264,29 +280,38 @@ main {
 .gallery img {
   width: 100%;
   display: block;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--pg) 24%, transparent);
+  border-radius: 14px;
   cursor: zoom-in;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-.gallery img:hover { border-color: color-mix(in srgb, var(--pg) 55%, transparent); }
+.gallery img:hover {
+  border-color: color-mix(in srgb, var(--pg) 55%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pg) 20%, transparent),
+    0 18px 44px -18px color-mix(in srgb, var(--pg) 30%, transparent);
+}
 
 .detail-body { margin: 26px 0; line-height: 1.85; }
 .detail-body p + p { margin-top: 1em; }
-.detail-tech { margin: 24px 0; }
-.detail-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+/* 正文之后是铭牌脚注区：细线起界（同顶栏/页脚的细线语言） */
+.detail-tech { margin: 30px 0 0; padding-top: 22px; border-top: 1px solid var(--border); }
+.detail-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .btn {
   display: inline-flex;
   align-items: center;
   padding: 10px 16px;
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--pg) 24%, transparent);
   border-radius: 10px;
   background: var(--surface);
   color: var(--text);
   font-size: 14px;
   transition: 0.15s;
 }
-.btn:hover { border-color: var(--pg); color: var(--pg); }
+.btn:hover {
+  border-color: color-mix(in srgb, var(--pg) 60%, transparent);
+  color: var(--pg);
+  box-shadow: 0 12px 32px -14px color-mix(in srgb, var(--pg) 38%, transparent);
+}
 
 .notfound { padding: 72px 0; text-align: center; color: var(--muted); }
 .notfound p { margin: 0 0 22px; }
@@ -300,7 +325,7 @@ main {
   max-width: 92vw;
   max-height: 80vh;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 14px;
 }
 .lightbox-close {
   display: block;
@@ -361,7 +386,21 @@ main {
   .page-head { padding: 36px 0 6px; gap: 14px; }
   .ph-icon { width: 48px; height: 48px; border-radius: 11px; }
   .ph-icon svg { width: 30px; height: 30px; }
-  .gallery { grid-template-columns: 1fr; }
+  /* 详情竖屏：铭牌收字距防折行，截图单列，链接按钮等宽易点 */
+  .detail .meta { margin-top: 24px; font-size: 11px; letter-spacing: 0.14em; gap: 10px; }
+  .gallery { grid-template-columns: 1fr; gap: 10px; }
+  .detail-tech { padding-top: 18px; }
+  .detail-links { gap: 8px; }
+  .detail-links .btn { flex: 1 1 auto; justify-content: center; }
   /* 页脚收成一行居中，且在文档流末尾（滚动才见） */
   .footer-inner { justify-content: center; gap: 14px; font-size: 11px; }
+}
+
+/* 横屏矮窗（手机横过来）：纵向留白收紧，媒体更早入画 */
+@media (max-height: 520px) {
+  .detail .meta { margin-top: 18px; }
+  .video-wrap { margin-top: 20px; }
+  .gallery { margin: 18px 0; gap: 10px; }
+  .detail-body { margin: 18px 0; }
+  main { padding-bottom: 48px; }
 }
