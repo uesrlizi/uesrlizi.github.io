@@ -355,7 +355,11 @@
     "cover": "img/covers/sword-and-bond.jpg",
     "shots": [
       "img/works/sword-and-bond/1.jpg",
-      "img/works/sword-and-bond/2.jpg"
+      "img/works/sword-and-bond/2.jpg",
+      "img/works/sword-and-bond/3.jpg",
+      "img/works/sword-and-bond/4.jpg",
+      "img/works/sword-and-bond/5.jpg",
+      "img/works/sword-and-bond/6.jpg"
     ],
     "video": {
       "bvid": "",
