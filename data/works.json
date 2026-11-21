@@ -49,10 +49,10 @@
     "id": "phase-protocol",
     "title": "相位协议",
     "titleEn": "Phase Protocol",
-    "desc": "30 天 Game Jam 的 FPS 跑酷：第一人称射击与位移技巧结合，虚幻引擎制作。",
-    "descEn": "An FPS parkour game built in a 30-day game jam: first-person shooting meets movement tech, made in Unreal Engine.",
-    "detail": "Tripo Game Jam S1 的团队作品，30 天内用 UE 5 完成开发。玩家在第一人称下同时进行射击与跑酷位移，考验瞄准与路线的配合。\n\n我在团队中负责程序与技术美术。（可再补充：你负责的具体模块、最难的技术点、是怎么解决的。）",
-    "detailEn": "A team entry for Tripo Game Jam S1, built in 30 days on UE 5. Players shoot and traverse in first person, pairing aim with movement routing.\n\nI served as programmer and technical artist on the team.",
+    "desc": "30 天 Game Jam 的 FPS 跑酷：协议特工登陆外星地表定位矿脉，传送位移配合作战。",
+    "descEn": "A 30-day game jam FPS parkour: a protocol agent lands on an alien surface to locate ore veins, teleporting through parkour and combat.",
+    "detail": "Tripo Game Jam S1 团队作品，30 天内用 UE 5 完成。玩家扮演协议特工，第一人称登陆外星地表：定位矿脉、部署信标，用传送能力跑酷与战斗。\n\n我负责玩法程序与手感打磨：传送位移、射击与用户控件；另做角色绑定与动画、场景资产的 AI 生成与整合，以及 UI 绘制与关卡设计。\n\n当时当作 UE 入门的练手项目，第一次完整走通蓝图玩法、绑定动画到打包发布的流程。",
+    "detailEn": "A team entry for Tripo Game Jam S1, built in 30 days on UE 5. Playing a protocol agent landing on an alien surface in first person: locate ore veins, deploy beacons, and use teleportation to parkour and fight.\n\nI owned gameplay programming and game feel — teleport movement, shooting and user widgets — plus character rigging and animation, AI-generated scene assets and their integration, and UI drawing and level design.\n\nI treated it as an onboarding project for Unreal: my first complete pass from Blueprint gameplay and rigging/animation to packaging and shipping.",
     "type": "game",
     "tags": [
       "游戏工程师",
@@ -174,18 +174,18 @@
     "id": "echo-ronin",
     "title": "回音浪人",
     "titleEn": "The Echo Ronin",
-    "desc": "7 天 Game Jam 的解谜游戏：利用地形与回音的传播来击败敌人，UE5 制作。",
-    "descEn": "A 7-day game jam puzzle game: use terrain and the travel of sound to defeat your enemies, made in UE5.",
-    "detail": "7 天 Game Jam 的解谜游戏：玩家控制浪人主角，利用地形与回音的传播规划路线、引开或击倒敌人。\n\n在极短周期内围绕单一机制（声音的传播与反弹）构建谜题与遭遇，保持玩法聚焦。",
-    "detailEn": "A puzzle game from a 7-day game jam: as a ronin, the player uses terrain and how sound travels and bounces to route around, lure out or take down enemies.\n\nWithin a very short cycle, puzzles and encounters stay focused on one mechanic — how sound propagates and reflects.",
+    "desc": "7 天 Game Jam 两人合作的解谜游戏：指挥武士借地形回音发动特殊能力，击败敌人。",
+    "descEn": "A 7-day game jam puzzle game by two people: command a ronin, turn terrain echoes into special abilities, and take enemies down.",
+    "detail": "7 天 Game Jam 两人合作的解谜游戏：玩家指挥武士角色行动，利用地形回音发动的特殊能力打败敌人。\n\n两人分工补全整条生产线：我负责玩法功能与关卡设计，把回音机制落成可解的谜题铺排，另做角色的绑定与动画。",
+    "detailEn": "A puzzle game from a 7-day game jam, built by two people: the player commands a ronin, using special abilities driven by terrain echoes to defeat enemies.\n\nTwo of us split the pipeline between us. I owned gameplay features and level design, turning the echo mechanic into solvable puzzle layouts, plus character rigging and animation.",
     "type": "game",
     "tags": [
       "档案",
       "游戏工程师"
     ],
     "date": "2025-11",
-    "role": "程序",
-    "roleEn": "Programmer",
+    "role": "程序 / 关卡设计 / 绑定动画",
+    "roleEn": "Programming / Level Design / Rigging & Animation",
     "tech": [
       "UE 5",
       "蓝图"
@@ -293,18 +293,18 @@
     "id": "game-dream",
     "title": "游戏之梦",
     "titleEn": "",
-    "desc": "Game Jam 作品：在游戏里做游戏——办公室、服务器机房与战场。（介绍待补）",
-    "descEn": "",
-    "detail": "（详情待补——玩法、你负责的部分、技术点之后补全。）",
-    "detailEn": "",
+    "desc": "48 小时 Game Jam 三人小队的动作闯关：在办公室、机房与战场之间，讲一个做游戏的梦。",
+    "descEn": "A 48-hour game jam action game by a three-person team: office, server room and battlefield, telling a dream of making games.",
+    "detail": "48 小时 Game Jam 三人小队作品。简单的动作闯关，讲一个程策美三人小队追逐做游戏梦想的故事：关卡从办公室、服务器机房一路打到战场。\n\n我负责玩法功能的程序开发：角色操控、战斗与关卡流程的实现，48 小时内完成可玩版本。",
+    "detailEn": "A 48-hour game jam entry by a three-person team. A simple action game about a trio of programmer, designer and artist chasing the dream of making games — levels run from the office and the server room to a battlefield.\n\nI handled gameplay programming: character control, combat and level flow, finished into a playable build within 48 hours.",
     "type": "game",
     "tags": [
       "档案",
       "游戏工程师"
     ],
     "date": "2025-12",
-    "role": "",
-    "roleEn": "",
+    "role": "玩法程序",
+    "roleEn": "Gameplay Programmer",
     "tech": [
       "UE 5"
     ],
@@ -328,6 +328,44 @@
       "steam": "",
       "github": "",
       "demo": ""
+    },
+    "featured": false,
+    "customPage": ""
+  },
+  {
+    "id": "sword-and-bond",
+    "title": "剑与缘",
+    "titleEn": "",
+    "desc": "社团生活 galgame：两位看板娘，自研网页视觉小说引擎，AI 全线生产，线上可试玩。",
+    "descEn": "A club-life visual novel starring two club heroines, on a self-built web VN engine, produced end to end by directing AI. Playable online.",
+    "detail": "社团生活题材的 galgame：以剑道部与兵击部两位看板娘为主角，还原社团日常活动与氛围。网页视觉小说引擎按我的需求开发，部署成静态网站，线上可试玩；程序、剧情、美术全线由我指挥 AI 完成。\n\n程序线：提需求开发网页视觉小说引擎。剧情线：制定主角人设与社团事实锚点，AI 在锚点上发展编写剧情，人工逐篇审核核对事实——事实错误会让熟悉社团的人出戏，这一层必须把住。\n\n美术线分三路：校园场景实拍后交 AI 做风格转换当背景图；配角立绘直接 AI 设计绘制，不做差分；主角立绘从原画师的表情差分出发，制定编辑工作流，由 AI 生产姿势差分，铺开表情×姿势的差分矩阵，全部人工验收。\n\n最难也最得意的是主角立绘差分矩阵：对同一张脸反复做 AI 编辑，画风会持续偏移，几轮之后明显「AI 味」，不再像原来的角色。解法是「去头参考图」——从原画到最终差分只做最多一次 AI 编辑，单次生成不让偏移累加，把原画画风保住。\n\n目前 demo 可玩，仍在持续润色。",
+    "detailEn": "A club-life visual novel starring the heroines of the kendo club and the HEMA club, recreating everyday club activities and atmosphere. The web visual-novel engine was built to my requirements and deployed as a static site, playable online; program, story and art were all produced by directing AI.\n\nProgramming: specifying and directing the web VN engine. Story: I defined the heroines' profiles and fact anchors for the clubs; the AI developed the script on top of them, and I reviewed every scene against the facts — factual errors would break immersion for anyone who actually knows the clubs, so this layer had to hold.\n\nArt ran on three tracks: campus locations were photographed, then style-transferred by AI into backgrounds; side characters were designed and drawn directly by AI, with no variants; the heroines' sprites started from the original artist's expression sheets — I defined an editing workflow, the AI produced pose variants, laying out an expression × pose matrix, all human-reviewed.\n\nThe hardest and proudest part is the heroine sprite matrix: repeated AI edits of the same face drift the art style further each round, until it clearly reads as AI and stops looking like the original character. The fix was a \"headless reference sheet\": at most one AI edit from the original art to the final variant — a single generation pass, so drift never accumulates and the original style holds.\n\nA playable demo is online; polish is ongoing.",
+    "type": "game",
+    "tags": [
+      "AI场景美术"
+    ],
+    "date": "2026-11",
+    "role": "独立开发（指挥 AI）",
+    "roleEn": "Solo Dev, Directing AI",
+    "tech": [
+      "网页视觉小说引擎",
+      "AI 生成管线",
+      "实拍转风格"
+    ],
+    "cover": "img/covers/sword-and-bond.jpg",
+    "shots": [
+      "img/works/sword-and-bond/1.jpg",
+      "img/works/sword-and-bond/2.jpg"
+    ],
+    "video": {
+      "bvid": "",
+      "youtube": ""
+    },
+    "links": {
+      "itch": "",
+      "steam": "",
+      "github": "",
+      "demo": "https://hema-kendo-galgame-z635.zai.site/"
     },
     "featured": false,
     "customPage": ""
